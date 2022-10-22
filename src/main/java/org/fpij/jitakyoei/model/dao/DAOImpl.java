@@ -8,6 +8,7 @@ import org.fpij.jitakyoei.util.DatabaseManager;
 
 import com.db4o.ObjectSet;
 import com.db4o.ext.ExtObjectContainer;
+import com.db4o.query.Query;
 
 public class DAOImpl<E> implements DAO<E> {
 
@@ -38,7 +39,7 @@ public class DAOImpl<E> implements DAO<E> {
 		System.out.println("DAOImpl.save()");
 		System.out.println(object);
 		if (validator.validate(object)) {
-			db.store(object);
+			db.set(object);
 			db.commit();
 			return true;
 		} else {
@@ -55,7 +56,7 @@ public class DAOImpl<E> implements DAO<E> {
 	@Override
 	public List<E> list() {
 		List<E> objects = new ArrayList<E>();
-		ObjectSet<E> result = db.queryByExample(clazz);
+		ObjectSet result = db.query(clazz);
 		while (result.hasNext()) {
 			objects.add((E) result.next());
 		}
@@ -64,7 +65,7 @@ public class DAOImpl<E> implements DAO<E> {
 
 	@Override
 	public E get(E object) throws IllegalArgumentException {
-		List<E> objectList = db.queryByExample(clazz);
+		List<E> objectList = db.query(clazz);
 		if (useEquals) {
 			for (E each : objectList) {
 				if (each.equals(object)) {
@@ -83,7 +84,11 @@ public class DAOImpl<E> implements DAO<E> {
 	@Override
 	public List<E> search(E object) {
 		List<E> objects = new ArrayList<E>();
-		ObjectSet<E> result = db.queryByExample(object);
+		Query query = db.query();
+                query.constrain(object);
+                
+                ObjectSet result = query.execute();
+                
 		while (result.hasNext()) {
 			objects.add((E) result.next());
 		}

@@ -26,7 +26,7 @@ public class MainAppView implements AppView {
 
 	public MainAppView() {
 		frame = new MainAppFrame();
-		new SwingBinder(frame, this).bind();
+		// new SwingBinder(frame, this).bind();
 		frame.setVisible(true);
 	}
 

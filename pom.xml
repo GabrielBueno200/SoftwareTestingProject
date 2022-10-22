@@ -7,13 +7,19 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <exec.mainClass>org.fpij.jitakyoei.util.Main</exec.mainClass>
     </properties>
-
-
     <dependencies>
+
+        <dependency>
+            <groupId>org.fudaa.com.db4o</groupId>
+            <artifactId>db4o-java5</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+
+
         <dependency>
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
@@ -40,29 +46,6 @@
             <version>20050920</version>
         </dependency>
 
-        <dependency>
-            <groupId>net.java.dev.genesis</groupId>
-            <artifactId>genesis</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/genesis/dist/genesis-annotation-jdk5-3.2.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>net.java.dev.genesis</groupId>
-            <artifactId>genesis-swing</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/genesis/dist/genesis-client-swing-3.2.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>com.db4o</groupId>
-            <artifactId>db4o</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/db4o-7.4.106.13438-java5.jar</systemPath>
-        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
@@ -109,26 +92,22 @@
             <version>3.1.0</version>
         </dependency>
 
-    </dependencies>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-        </plugins>
+
+            <dependency>
+            <groupId>net.java.dev.genesis</groupId>
+            <artifactId>genesis</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/genesis/dist/genesis-annotation-jdk5-3.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>net.java.dev.genesis</groupId>
+            <artifactId>genesis-swing</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/genesis/dist/genesis-client-swing-3.2.jar</systemPath>
+        </dependency>
         
-         <resources>
-            <resource>
-                <directory>src/main/resources/icones</directory>
-            </resource>
-        </resources>
-    </build>
+    </dependencies>
 </project>

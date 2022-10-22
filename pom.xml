@@ -191,7 +191,10 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources/icones</directory>
+                <directory>src/main/resources/icones/icon_16x16</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources/icones/icon_32x32</directory>
             </resource>
         </resources>
     </build>

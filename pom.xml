@@ -14,46 +14,12 @@
     
     <repositories>
         <repository>
-          <id>repositorio</id>
+          <id>libs</id>
           <url>file://${project.basedir}/lib</url>
         </repository>
     </repositories>
   
     <dependencies>
-
-        <dependency>
-          <groupId>db4o</groupId>
-          <artifactId>db4o</artifactId>
-          <version>7.4.106.13438</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.toedter</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>jgoodies-forms</artifactId>
-            <version>1.9.0</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.cedarsoft.commons.swing</groupId>
-            <artifactId>jgoodies</artifactId>
-            <version>8.9.2</version>
-        </dependency>
-    
-
-        <dependency>
-            <groupId>tablelayout</groupId>
-            <artifactId>TableLayout</artifactId>
-            <version>20050920</version>
-        </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
@@ -98,6 +64,39 @@
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+          <groupId>db4o</groupId>
+          <artifactId>db4o</artifactId>
+          <version>7.4.106.13438</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>jgoodies-forms</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.cedarsoft.commons.swing</groupId>
+            <artifactId>jgoodies</artifactId>
+            <version>8.9.2</version>
+        </dependency>
+    
+
+        <dependency>
+            <groupId>tablelayout</groupId>
+            <artifactId>TableLayout</artifactId>
+            <version>20050920</version>
         </dependency>
 
         <dependency>
@@ -182,13 +181,6 @@
           <groupId>genesis</groupId>
           <artifactId>reusable-components</artifactId>
           <version>1.0</version>
-        </dependency>
-
-        <dependency>
-          <groupId>org.junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.13.2</version>
-          <scope>test</scope>
         </dependency>
 
         <dependency>

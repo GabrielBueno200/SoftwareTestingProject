@@ -28,8 +28,8 @@ public class AlunoBOImpl implements AlunoBO {
 			dao.save(aluno);
 			fireModelChangeEvent(aluno);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException( "Ocorreu um erro ao cadastrar o aluno!"
-				+ " Verifique se todos os dados foram preenchidos corretamente.");
+			throw new IllegalArgumentException("Ocorreu um erro ao cadastrar o aluno!"
+					+ " Verifique se todos os dados foram preenchidos corretamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao salvar o aluno.");
@@ -37,25 +37,23 @@ public class AlunoBOImpl implements AlunoBO {
 	}
 
 	@Override
-	public void updateAluno(Aluno aluno) throws Exception{
+	public void updateAluno(Aluno aluno) throws Exception {
 		try {
 			Aluno old = null;
 			old = dao.get(aluno);
-			if(old!=null){		
+			if (old != null) {
 				old.copyProperties(aluno);
 			}
 			fireModelChangeEvent(old);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-			throw new IllegalArgumentException( "Ocorreu um erro ao salvar os dados do aluno."
-				+ " Verifique se todos os dados foram preenchidos corretamente!");
+			throw new IllegalArgumentException("Ocorreu um erro ao salvar os dados do aluno."
+					+ " Verifique se todos os dados foram preenchidos corretamente!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao salvar o aluno.");
 		}
 	}
-	
-	
 
 	@Override
 	public List<Aluno> searchAluno(Aluno aluno) throws Exception {
@@ -64,7 +62,7 @@ public class AlunoBOImpl implements AlunoBO {
 			result = dao.search(aluno);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Ocorreu um erro ao salvar os dados do aluno."
-				+ " Verifique se todos os dados foram preenchidos corretamente!");
+					+ " Verifique se todos os dados foram preenchidos corretamente!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao buscar os aluno.");
@@ -79,7 +77,7 @@ public class AlunoBOImpl implements AlunoBO {
 			result = dao.list();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Ocorreu um erro ao obter a lista de alunos."
-				+ " Verifique se todos os dados foram preenchidos corretamente!");
+					+ " Verifique se todos os dados foram preenchidos corretamente!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido o obter a lista de alunos.");

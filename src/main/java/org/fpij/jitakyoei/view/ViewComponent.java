@@ -6,5 +6,6 @@ import org.fpij.jitakyoei.facade.AppFacade;
 
 public interface ViewComponent {
 	public JPanel getGui();
+
 	public void registerFacade(AppFacade fac);
 }

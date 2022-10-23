@@ -16,8 +16,7 @@ public class EntidadeCadastrarView implements ViewComponent {
 	private AppFacade facade;
 	private EntidadeForm entidadeForm;
 	private MainAppView parent;
-	
-	
+
 	public EntidadeCadastrarView(MainAppView parent) {
 		this.parent = parent;
 		gui = new EntidadeCadastrarPanel();
@@ -36,7 +35,7 @@ public class EntidadeCadastrarView implements ViewComponent {
 	public void registerFacade(AppFacade fac) {
 		this.facade = fac;
 	}
-	
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cadastrar".
 	 * 
@@ -51,10 +50,10 @@ public class EntidadeCadastrarView implements ViewComponent {
 				parent.removeTabPanel(gui);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}		
+			}
 		}
 	}
-	
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cancelar".
 	 * 

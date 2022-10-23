@@ -1,6 +1,5 @@
 package org.fpij.jitakyoei.facade;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +20,12 @@ import org.fpij.jitakyoei.model.beans.ProfessorEntidade;
 import org.fpij.jitakyoei.view.AppView;
 
 public class AppFacadeImpl implements AppFacade {
-	
 	private AppView view;
 	private AlunoBO alunoBO;
 	private ProfessorBO professorBO;
 	private EntidadeBO entidadeBO;
 	private ProfessorEntidadeBO professorEntidadeBO;
-	
+
 	public AppFacadeImpl(AppView view) {
 		this.view = view;
 		this.alunoBO = new AlunoBOImpl(view);
@@ -36,25 +34,25 @@ public class AppFacadeImpl implements AppFacade {
 		this.professorEntidadeBO = new ProfessorEntidadeBOImpl(view);
 	}
 
-	private void reportException(Exception e){
+	private void reportException(Exception e) {
 		view.displayException(e);
 	}
-	
+
 	@Override
 	public void createAluno(Aluno aluno) {
 		System.out.println("AppFacadeImpl.createAluno()");
-		try{
+		try {
 			alunoBO.createAluno(aluno);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 	}
 
 	@Override
 	public void updateAluno(Aluno aluno) {
-		try{
+		try {
 			alunoBO.updateAluno(aluno);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 	}
@@ -62,9 +60,9 @@ public class AppFacadeImpl implements AppFacade {
 	@Override
 	public List<Aluno> searchAluno(Aluno aluno) {
 		List<Aluno> result = new ArrayList<Aluno>();
-		try{
+		try {
 			result = alunoBO.searchAluno(aluno);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 		return result;
@@ -72,29 +70,29 @@ public class AppFacadeImpl implements AppFacade {
 
 	@Override
 	public void listAlunos() {
-		try{
+		try {
 			alunoBO.listAll();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 	}
 
 	@Override
 	public void createProfessor(Professor professor) {
-		try{
+		try {
 			professorBO.createProfessor(professor);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			reportException(e);
-		}		
+		}
 	}
 
 	@Override
 	public List<Professor> listProfessores() {
 		List<Professor> result = null;
-		try{
+		try {
 			result = professorBO.listAll();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 		return result;
@@ -103,9 +101,9 @@ public class AppFacadeImpl implements AppFacade {
 	@Override
 	public List<Professor> searchProfessor(Professor professor) {
 		List<Professor> result = null;
-		try{
+		try {
 			result = professorBO.searchProfessor(professor);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 		return result;
@@ -113,18 +111,18 @@ public class AppFacadeImpl implements AppFacade {
 
 	@Override
 	public void updateProfessor(Professor professor) {
-		try{
+		try {
 			professorBO.updateProfessor(professor);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 	}
 
 	@Override
 	public void createEntidade(Entidade entidade) {
-		try{
+		try {
 			entidadeBO.createEntidade(entidade);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 	}
@@ -132,20 +130,20 @@ public class AppFacadeImpl implements AppFacade {
 	@Override
 	public List<Entidade> listEntidade() {
 		List<Entidade> result = null;
-		try{
+		try {
 			result = entidadeBO.listAll();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
-		return result; 
+		return result;
 	}
 
 	@Override
 	public List<Entidade> searchEntidade(Entidade entidade) {
 		List<Entidade> result = null;
-		try{
+		try {
 			result = entidadeBO.searchEntidade(entidade);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 		return result;
@@ -153,18 +151,18 @@ public class AppFacadeImpl implements AppFacade {
 
 	@Override
 	public void updateEntidade(Entidade entidade) {
-		try{
+		try {
 			entidadeBO.updateEntidade(entidade);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 	}
 
 	@Override
 	public void createProfessorEntidade(List<ProfessorEntidade> relacionamentos) {
-		try{
+		try {
 			professorEntidadeBO.createProfessorEntidade(relacionamentos);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			reportException(e);
 		}
 	}

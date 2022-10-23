@@ -31,13 +31,12 @@ public class AlunoCadastrarView implements ViewComponent {
 	public JPanel getGui() {
 		return gui;
 	}
-	
+
 	@Override
 	public void registerFacade(AppFacade fac) {
 		this.facade = fac;
 	}
-	
-	
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cadastrar".
 	 * 
@@ -56,7 +55,7 @@ public class AlunoCadastrarView implements ViewComponent {
 			}
 		}
 	}
-	
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cancelar".
 	 * 

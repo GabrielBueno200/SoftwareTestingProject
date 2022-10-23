@@ -115,7 +115,7 @@ public class FiliadoForm {
 	}
 
 	/* Métodos de acesso à GUI */
-	
+
 	public String getNome() {
 		return filiadoPanel.getNome().getText();
 	}

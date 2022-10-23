@@ -11,13 +11,13 @@ import org.fpij.jitakyoei.model.beans.Professor;
 import org.fpij.jitakyoei.view.forms.ProfessorForm;
 import org.fpij.jitakyoei.view.gui.ProfessorAtualizarPanel;
 
-public class ProfessorAtualizarView implements ViewComponent{
+public class ProfessorAtualizarView implements ViewComponent {
 	private ProfessorAtualizarPanel gui;
 	private ProfessorForm professorForm;
 	private AppFacade facade;
 	private MainAppView parent;
 
-	public ProfessorAtualizarView(MainAppView parent, Professor professor){
+	public ProfessorAtualizarView(MainAppView parent, Professor professor) {
 		this.parent = parent;
 		gui = new ProfessorAtualizarPanel();
 		professorForm = new ProfessorForm(gui.getProfessorPanel(), professor);
@@ -32,9 +32,9 @@ public class ProfessorAtualizarView implements ViewComponent{
 
 	@Override
 	public void registerFacade(AppFacade fac) {
-		this.facade = fac;		
+		this.facade = fac;
 	}
-	
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Atualizar".
 	 * 
@@ -53,7 +53,7 @@ public class ProfessorAtualizarView implements ViewComponent{
 			}
 		}
 	}
-	
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cancelar".
 	 * 

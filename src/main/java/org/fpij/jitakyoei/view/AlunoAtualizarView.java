@@ -11,13 +11,13 @@ import org.fpij.jitakyoei.model.beans.Aluno;
 import org.fpij.jitakyoei.view.forms.AlunoForm;
 import org.fpij.jitakyoei.view.gui.AlunoAtualizarPanel;
 
-public class AlunoAtualizarView implements ViewComponent{
+public class AlunoAtualizarView implements ViewComponent {
 	private AlunoAtualizarPanel gui;
 	private AlunoForm alunoForm;
 	private AppFacade facade;
 	private MainAppView parent;
-	
-	public AlunoAtualizarView(MainAppView parent, Aluno aluno){
+
+	public AlunoAtualizarView(MainAppView parent, Aluno aluno) {
 		this.parent = parent;
 		gui = new AlunoAtualizarPanel();
 		alunoForm = new AlunoForm(gui.getAlunoPanel());
@@ -25,17 +25,17 @@ public class AlunoAtualizarView implements ViewComponent{
 		gui.getAtualizar().addActionListener(new AtualizarActionHandler());
 		gui.getCancelar().addActionListener(new CancelarActionHandler());
 	}
-	
+
 	@Override
-	public JPanel getGui(){
+	public JPanel getGui() {
 		return gui;
 	}
-	
+
 	@Override
 	public void registerFacade(AppFacade fac) {
-		this.facade = fac;		
-	}	
-	
+		this.facade = fac;
+	}
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Atualizar".
 	 * 
@@ -54,7 +54,7 @@ public class AlunoAtualizarView implements ViewComponent{
 			}
 		}
 	}
-	
+
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cancelar".
 	 * 

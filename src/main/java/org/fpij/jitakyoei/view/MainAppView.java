@@ -7,10 +7,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import net.java.dev.genesis.annotation.Action;
-import net.java.dev.genesis.annotation.Form;
-import net.java.dev.genesis.ui.swing.SwingBinder;
-
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Aluno;
 import org.fpij.jitakyoei.model.beans.Entidade;
@@ -18,6 +14,10 @@ import org.fpij.jitakyoei.model.beans.Professor;
 import org.fpij.jitakyoei.util.CloseTabIcon;
 import org.fpij.jitakyoei.view.gui.MainAppFrame;
 import org.fpij.jitakyoei.view.gui.SobrePanel;
+
+import net.java.dev.genesis.annotation.Action;
+import net.java.dev.genesis.annotation.Form;
+import net.java.dev.genesis.ui.swing.SwingBinder;
 
 @Form
 public class MainAppView implements AppView {
@@ -57,8 +57,8 @@ public class MainAppView implements AppView {
 		frame.setVisible(true);
 		frame.validate();
 	}
-	
-	public void removeTabPanel(Component viewComponent){
+
+	public void removeTabPanel(Component viewComponent) {
 		frame.getTabbedPane().remove(viewComponent);
 	}
 
@@ -216,7 +216,6 @@ public class MainAppView implements AppView {
 	public void buscarEntidadeIcon() {
 		buscarEntidadeMenuItem();
 	}
-
 
 	@Action
 	public void sobreMenuItem() {

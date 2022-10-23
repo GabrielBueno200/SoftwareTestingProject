@@ -7,11 +7,11 @@ import org.fpij.jitakyoei.model.dao.DAOImpl;
 
 public class FiliadoID {
 	private long qtd;
-	
+
 	private static DAO<FiliadoID> dao;
 	private static FiliadoID ref;
-	
-	static{
+
+	static {
 		dao = new DAOImpl<FiliadoID>(FiliadoID.class);
 		ref = getInstance();
 	}

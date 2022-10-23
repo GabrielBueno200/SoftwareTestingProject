@@ -4,7 +4,7 @@ import org.fpij.jitakyoei.view.gui.BuscaCamposPanel;
 
 public class CamposBuscaForm {
 	private BuscaCamposPanel buscaCamposPanel;
-	
+
 	public CamposBuscaForm(BuscaCamposPanel buscaCamposPanel) {
 		this.buscaCamposPanel = buscaCamposPanel;
 	}
@@ -24,5 +24,4 @@ public class CamposBuscaForm {
 	public void setRegistroFpij(String registroFpij) {
 		buscaCamposPanel.getRegistroFpij().setText(registroFpij);
 	}
-	
 }

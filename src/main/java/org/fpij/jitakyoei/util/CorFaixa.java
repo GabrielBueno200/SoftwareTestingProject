@@ -22,22 +22,22 @@ public enum CorFaixa {
 	VERMELHA8DAN("Vermelha 8º Dan"),
 	VERMELHA9DAN("Vermelha 9º Dan"),
 	VERMELHA10DAN("Vermelha 10º Dan");
-	
+
 	public final String descricao;
-	
-	CorFaixa(String descricao){
+
+	CorFaixa(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	public String getDescricao(){
+
+	public String getDescricao() {
 		return descricao;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return descricao;
 	}
-	
-	public static List<CorFaixa> getCoresFaixa(){
+
+	public static List<CorFaixa> getCoresFaixa() {
 		List<CorFaixa> cores = new ArrayList<CorFaixa>();
 		cores.add(BRANCA);
 		cores.add(CINZA);
@@ -57,8 +57,8 @@ public enum CorFaixa {
 		cores.add(VERMELHA8DAN);
 		cores.add(VERMELHA9DAN);
 		cores.add(VERMELHA10DAN);
-		
+
 		return cores;
 	}
-	
+
 }

@@ -9,7 +9,7 @@ import org.fpij.jitakyoei.util.FiliadoID;
 import org.fpij.jitakyoei.view.AppView;
 
 public class ProfessorBOImpl implements ProfessorBO {
-	
+
 	private AppView view;
 	private static DAO<Professor> dao = new DAOImpl<Professor>(Professor.class);
 
@@ -28,22 +28,22 @@ public class ProfessorBOImpl implements ProfessorBO {
 			dao.save(professor);
 			fireModelChangeEvent(professor);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException( "Ocorreu um erro ao cadastrar o professor!"
-				+ " Verifique se todos os dados foram preenchidos corretamente.");
+			throw new IllegalArgumentException("Ocorreu um erro ao cadastrar o professor!"
+					+ " Verifique se todos os dados foram preenchidos corretamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao salvar o professor.");
 		}
 	}
-	
+
 	@Override
 	public void updateProfessor(Professor professor) throws Exception {
 		try {
 			dao.save(professor);
 			fireModelChangeEvent(professor);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException( "Ocorreu um erro ao atualizar os dados do professor!"
-				+ " Verifique se todos os dados foram preenchidos corretamente.");
+			throw new IllegalArgumentException("Ocorreu um erro ao atualizar os dados do professor!"
+					+ " Verifique se todos os dados foram preenchidos corretamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao atualizar o professor.");
@@ -57,7 +57,7 @@ public class ProfessorBOImpl implements ProfessorBO {
 			result = dao.list();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Ocorreu um erro ao listar de professores."
-				+ " Verifique se todos os dados foram preenchidos corretamente!");
+					+ " Verifique se todos os dados foram preenchidos corretamente!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao listar professores.");
@@ -73,7 +73,7 @@ public class ProfessorBOImpl implements ProfessorBO {
 			result = dao.search(professor);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Ocorreu um erro ao buscar os professores."
-				+ " Verifique se todos os dados foram preenchidos corretamente!");
+					+ " Verifique se todos os dados foram preenchidos corretamente!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao buscar os professores.");

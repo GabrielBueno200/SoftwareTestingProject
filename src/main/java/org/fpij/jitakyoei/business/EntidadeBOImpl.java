@@ -8,14 +8,14 @@ import org.fpij.jitakyoei.model.dao.DAOImpl;
 import org.fpij.jitakyoei.view.AppView;
 
 public class EntidadeBOImpl implements EntidadeBO {
-	
+
 	private AppView view;
 	private static DAO<Entidade> dao = new DAOImpl<Entidade>(Entidade.class);
 
 	public EntidadeBOImpl(AppView view) {
 		this.view = view;
 	}
-	
+
 	private void fireModelChangeEvent(Entidade entidade) {
 		view.handleModelChange(entidade);
 	}
@@ -27,8 +27,8 @@ public class EntidadeBOImpl implements EntidadeBO {
 			dao.save(entidade);
 			fireModelChangeEvent(entidade);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException( "Ocorreu um erro ao cadastrar a entidade!"
-				+ " Verifique se todos os dados foram preenchidos corretamente.");
+			throw new IllegalArgumentException("Ocorreu um erro ao cadastrar a entidade!"
+					+ " Verifique se todos os dados foram preenchidos corretamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao salvar a entidade.");
@@ -41,8 +41,8 @@ public class EntidadeBOImpl implements EntidadeBO {
 		try {
 			result = dao.list();
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException( "Ocorreu um erro ao listar entidades!"
-				+ " Verifique se todos os dados foram preenchidos corretamente.");
+			throw new IllegalArgumentException("Ocorreu um erro ao listar entidades!"
+					+ " Verifique se todos os dados foram preenchidos corretamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao listar entidades.");
@@ -56,8 +56,8 @@ public class EntidadeBOImpl implements EntidadeBO {
 		try {
 			result = dao.search(entidade);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException( "Ocorreu um erro ao buscar entidades!"
-				+ " Verifique se todos os dados foram preenchidos corretamente.");
+			throw new IllegalArgumentException("Ocorreu um erro ao buscar entidades!"
+					+ " Verifique se todos os dados foram preenchidos corretamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao buscar entidades.");
@@ -71,8 +71,8 @@ public class EntidadeBOImpl implements EntidadeBO {
 			dao.save(entidade);
 			fireModelChangeEvent(entidade);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException( "Ocorreu um erro ao atualizar a entidade!"
-				+ " Verifique se todos os dados foram preenchidos corretamente.");
+			throw new IllegalArgumentException("Ocorreu um erro ao atualizar a entidade!"
+					+ " Verifique se todos os dados foram preenchidos corretamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Desculpe, ocorreu um erro desconhecido ao atualizar a entidade.");

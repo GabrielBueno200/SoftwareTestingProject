@@ -9,3 +9,4 @@ bin/org/fpij/jitakyoei/view/gui/*.jfd
 fpij.db
 test.db
 .vscode
+target

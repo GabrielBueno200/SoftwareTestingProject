@@ -1,6 +1,6 @@
 package org.fpij.jitakyoei.model.dao;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Date;
 import java.util.List;
@@ -71,7 +71,8 @@ public class AlunoDaoTest {
 		for (Aluno each : all) {
 			alunoDao.delete(each);
 		}
-		assertEquals(0, alunoDao.list().size());
+
+		assertThat(alunoDao.list().size()).isZero();
 	}
 
 	@Test
@@ -79,28 +80,28 @@ public class AlunoDaoTest {
 		clearDatabase();
 
 		alunoDao.save(aluno);
-		assertEquals("036.464.453-27", alunoDao.get(aluno).getFiliado().getCpf());
-		assertEquals("Aécio", alunoDao.get(aluno).getFiliado().getNome());
-		assertEquals("Professor", alunoDao.get(aluno).getProfessor().getFiliado().getNome());
-		assertEquals("Dirceu", alunoDao.get(aluno).getProfessor().getFiliado().getEndereco().getBairro());
+		assertThat("036.464.453-27").isEqualTo(alunoDao.get(aluno).getFiliado().getCpf());
+		assertThat("Aécio").isEqualTo(alunoDao.get(aluno).getFiliado().getNome());
+		assertThat("Professor").isEqualTo(alunoDao.get(aluno).getProfessor().getFiliado().getNome());
+		assertThat("Dirceu").isEqualTo(alunoDao.get(aluno).getProfessor().getFiliado().getEndereco().getBairro());
 	}
 
 	@Test
 	public void updateAluno() throws Exception {
 		clearDatabase();
-		assertEquals(0, alunoDao.list().size());
+		assertThat(alunoDao.list().size()).isZero();
 
 		alunoDao.save(aluno);
-		assertEquals(1, alunoDao.list().size());
-		assertEquals("Aécio", aluno.getFiliado().getNome());
+		assertThat(alunoDao.list().size()).isEqualTo(1);
+		assertThat("Aécio").isEqualTo(aluno.getFiliado().getNome());
 
 		Aluno a1 = alunoDao.get(aluno);
 		a1.getFiliado().setNome("TesteUpdate");
 		alunoDao.save(a1);
 
 		Aluno a2 = alunoDao.get(a1);
-		assertEquals("TesteUpdate", a2.getFiliado().getNome());
-		assertEquals(1, alunoDao.list().size());
+		assertThat("TesteUpdate").isEqualTo(a2.getFiliado().getNome());
+		assertThat(alunoDao.list().size()).isEqualTo(1);
 	}
 
 	@Test
@@ -108,22 +109,22 @@ public class AlunoDaoTest {
 		int qtd = alunoDao.list().size();
 
 		alunoDao.save(new Aluno());
-		assertEquals(qtd + 1, alunoDao.list().size());
+		assertThat(alunoDao.list().size()).isEqualTo(qtd + 1);
 
 		alunoDao.save(new Aluno());
-		assertEquals(qtd + 2, alunoDao.list().size());
+		assertThat(alunoDao.list().size()).isEqualTo(qtd + 2);
 
 		alunoDao.save(new Aluno());
-		assertEquals(qtd + 3, alunoDao.list().size());
+		assertThat(alunoDao.list().size()).isEqualTo(qtd + 3);
 
 		alunoDao.save(new Aluno());
-		assertEquals(qtd + 4, alunoDao.list().size());
+		assertThat(alunoDao.list().size()).isEqualTo(qtd + 4);
 
 		clearDatabase();
-		assertEquals(0, alunoDao.list().size());
+		assertThat(alunoDao.list().size()).isZero();
 
 		alunoDao.save(new Aluno());
-		assertEquals(1, alunoDao.list().size());
+		assertThat(alunoDao.list().size()).isEqualTo(1);
 	}
 
 	@Test
@@ -137,11 +138,11 @@ public class AlunoDaoTest {
 		a.setFiliado(f);
 
 		List<Aluno> result = alunoDao.search(a);
-		assertEquals(1, result.size());
-		assertEquals("036.464.453-27", result.get(0).getFiliado().getCpf());
+		assertThat(result.size()).isEqualTo(1);
+		assertThat("036.464.453-27").isEqualTo(result.get(0).getFiliado().getCpf());
 
 		clearDatabase();
-		assertEquals(0, alunoDao.search(a).size());
+		assertThat(alunoDao.search(a).size()).isZero();
 	}
 
 	@AfterClass
@@ -149,5 +150,4 @@ public class AlunoDaoTest {
 		clearDatabase();
 		DatabaseManager.close();
 	}
-
 }

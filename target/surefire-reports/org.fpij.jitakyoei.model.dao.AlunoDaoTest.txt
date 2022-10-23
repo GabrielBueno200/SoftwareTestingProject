@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: org.fpij.jitakyoei.model.dao.AlunoDaoTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.654 s <<< FAILURE! - in org.fpij.jitakyoei.model.dao.AlunoDaoTest
-org.fpij.jitakyoei.model.dao.AlunoDaoTest.testListarEAdicionarAlunos  Time elapsed: 0.012 s  <<< ERROR!
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.351 s <<< FAILURE! - in org.fpij.jitakyoei.model.dao.AlunoDaoTest
+org.fpij.jitakyoei.model.dao.AlunoDaoTest.testListarEAdicionarAlunos  Time elapsed: 0.006 s  <<< ERROR!
 java.lang.NullPointerException
-	at org.fpij.jitakyoei.model.beans.Aluno.toString(Aluno.java:27)
+	at org.fpij.jitakyoei.model.beans.Aluno.toString(Aluno.java:33)
 	at java.base/java.lang.String.valueOf(String.java:3388)
 	at org.apache.maven.surefire.api.report.ConsoleOutputCapture$ForwardingPrintStream.println(ConsoleOutputCapture.java:131)
 	at org.fpij.jitakyoei.model.dao.DAOImpl.save(DAOImpl.java:39)
-	at org.fpij.jitakyoei.model.dao.AlunoDaoTest.testListarEAdicionarAlunos(AlunoDaoTest.java:113)
+	at org.fpij.jitakyoei.model.dao.AlunoDaoTest.testListarEAdicionarAlunos(AlunoDaoTest.java:110)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

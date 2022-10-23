@@ -12,8 +12,8 @@ import org.fpij.jitakyoei.model.beans.Filiado;
 import org.fpij.jitakyoei.model.beans.Professor;
 import org.fpij.jitakyoei.util.DatabaseManager;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class AlunoDaoTest {
 
@@ -25,7 +25,7 @@ public class AlunoDaoTest {
 	private static Filiado filiadoProf;
 	private static Professor professor;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUp() {
 		DatabaseManager.setEnviroment(DatabaseManager.TEST);
 		f1 = new Filiado();

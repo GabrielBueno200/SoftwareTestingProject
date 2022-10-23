@@ -1,18 +1,18 @@
 -------------------------------------------------------------------------------
 Test set: org.fpij.jitakyoei.model.dao.AlunoDaoTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.351 s <<< FAILURE! - in org.fpij.jitakyoei.model.dao.AlunoDaoTest
-org.fpij.jitakyoei.model.dao.AlunoDaoTest.testListarEAdicionarAlunos  Time elapsed: 0.006 s  <<< ERROR!
-java.lang.NullPointerException
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.437 s <<< FAILURE! - in org.fpij.jitakyoei.model.dao.AlunoDaoTest
+org.fpij.jitakyoei.model.dao.AlunoDaoTest.testListarEAdicionarAlunos  Time elapsed: 0.004 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "org.fpij.jitakyoei.model.beans.Filiado.toString()" because "this.filiado" is null
 	at org.fpij.jitakyoei.model.beans.Aluno.toString(Aluno.java:33)
-	at java.base/java.lang.String.valueOf(String.java:3388)
+	at java.base/java.lang.String.valueOf(String.java:3365)
 	at org.apache.maven.surefire.api.report.ConsoleOutputCapture$ForwardingPrintStream.println(ConsoleOutputCapture.java:131)
 	at org.fpij.jitakyoei.model.dao.DAOImpl.save(DAOImpl.java:39)
 	at org.fpij.jitakyoei.model.dao.AlunoDaoTest.testListarEAdicionarAlunos(AlunoDaoTest.java:110)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
@@ -35,7 +35,7 @@ java.lang.NullPointerException
 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
 	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:43)
 	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
 	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
 	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)
 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
@@ -43,7 +43,7 @@ java.lang.NullPointerException
 	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
 	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
 	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:82)
 	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:73)
 	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147)

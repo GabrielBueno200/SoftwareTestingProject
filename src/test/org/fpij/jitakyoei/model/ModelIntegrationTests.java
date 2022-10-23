@@ -9,7 +9,7 @@ import org.fpij.jitakyoei.model.beans.Filiado;
 import org.fpij.jitakyoei.model.beans.Professor;
 import org.fpij.jitakyoei.model.beans.Rg;
 import org.fpij.jitakyoei.util.DatabaseManager;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 
 public class ModelIntegrationTests {
 	// private static DAO<Aluno> alunoDao;
@@ -20,7 +20,7 @@ public class ModelIntegrationTests {
 	private static Filiado filiadoProf;
 	private static Professor professor;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUp() {
 		DatabaseManager.setEnviroment(DatabaseManager.TEST);
 		filiadoAluno = new Filiado();

@@ -1,6 +1,7 @@
 package org.fpij.jitakyoei.view;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
@@ -35,7 +36,9 @@ public class AlunoBuscarViewTest {
             optionPaneMock.verify(
                     () -> JOptionPane.showMessageDialog(
                             any(Component.class),
-                            eq("Aluno não encontrado!")),
+                            eq("Aluno não encontrado!"),
+                            anyString(),
+                            eq(JOptionPane.ERROR_MESSAGE)),
                     times(1));
         }
     }

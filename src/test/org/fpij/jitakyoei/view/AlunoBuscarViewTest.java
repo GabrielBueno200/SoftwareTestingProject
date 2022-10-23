@@ -119,7 +119,7 @@ public class AlunoBuscarViewTest {
 
     @ParameterizedTest
     @ValueSource(ints = { 2, 3, 4, 5 })
-    public void BBuscar_AposBuscarAlunosValidos_ListaDeAlunosDeveEstarPreenchida(int alunosAmount) {
+    public void Buscar_AposBuscarAlunosValidos_ListaDeAlunosDeveEstarPreenchida(int alunosAmount) {
         // Arrange
         List<Aluno> alunosListMock = new AlunoMock().getAlunosMock(alunosAmount);
 

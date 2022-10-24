@@ -56,12 +56,12 @@ public class ProfessorBuscarViewTest {
     @Test
     public void Buscar_InserirRegistroComLetras_ExibirAlertaDeRegistroInvalido() {
         // Arrange
-        JTextField mockedTextFieldRegistro = spy(new JTextField(fakeValuesService.regexify("[a-zA-Z]+")));
-        JTextField mockedTextFieldNome = spy(new JTextField(""));
+        JTextField textFieldRegistroSpy = spy(new JTextField(fakeValuesService.regexify("[a-zA-Z]+")));
+        JTextField textFieldNomeSpy = spy(new JTextField(""));
 
         try (MockedConstruction<ProfessorBuscarPanel> mocked = mockConstruction(
                 ProfessorBuscarPanel.class,
-                GetProfessorBuscarPanelMock(mockedTextFieldNome, mockedTextFieldRegistro))) {
+                GetProfessorBuscarPanelMock(textFieldNomeSpy, textFieldRegistroSpy))) {
 
             ProfessorBuscarView sut = new ProfessorBuscarView();
             JButton searchButton = ((ProfessorBuscarPanel) sut.getGui()).getBuscar();
@@ -115,12 +115,12 @@ public class ProfessorBuscarViewTest {
         AppFacade facadeMock = mock(AppFacade.class); // Mock facade
         when(facadeMock.searchProfessor(any(Professor.class))).thenReturn(professoresSearchMock);
 
-        JTextField mockedTextFieldNome = spy(new JTextField(faker.name().fullName()));
-        JTextField mockedTextFieldRegistro = spy(new JTextField(Long.toString(faker.random().nextLong())));
+        JTextField textFieldNomeSpy = spy(new JTextField(faker.name().fullName()));
+        JTextField textFieldRegistroSpy = spy(new JTextField(Long.toString(faker.random().nextLong())));
 
         try (MockedConstruction<ProfessorBuscarPanel> mocked = mockConstruction(
                 ProfessorBuscarPanel.class,
-                GetProfessorBuscarPanelMock(mockedTextFieldNome, mockedTextFieldRegistro))) {
+                GetProfessorBuscarPanelMock(textFieldNomeSpy, textFieldRegistroSpy))) {
 
             ProfessorBuscarView sut = new ProfessorBuscarView();
             sut.registerFacade(facadeMock);
@@ -143,14 +143,14 @@ public class ProfessorBuscarViewTest {
         }
     }
 
-    private MockInitializer<ProfessorBuscarPanel> GetProfessorBuscarPanelMock(JTextField mockedTextFieldNome, JTextField mockedTextFieldRegistro)
+    private MockInitializer<ProfessorBuscarPanel> GetProfessorBuscarPanelMock(JTextField textFieldNomeSpy, JTextField textFieldRegistroSpy)
     {
         return (professorPanelMock, context) -> 
         {
             // Mock campos de busca
             BuscaCamposPanel buscaCampoPanelMock = mock(BuscaCamposPanel.class);
-            when(buscaCampoPanelMock.getNome()).thenReturn(mockedTextFieldNome);
-            when(buscaCampoPanelMock.getRegistroFpij()).thenReturn(mockedTextFieldRegistro);
+            when(buscaCampoPanelMock.getNome()).thenReturn(textFieldNomeSpy);
+            when(buscaCampoPanelMock.getRegistroFpij()).thenReturn(textFieldRegistroSpy);
             when(professorPanelMock.getBuscaCamposPanel()).thenReturn(buscaCampoPanelMock);
 
             // Mock botão de busca

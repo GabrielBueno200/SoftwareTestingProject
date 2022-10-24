@@ -4,10 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockConstruction;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
@@ -61,9 +62,11 @@ public class AlunoBuscarViewTest {
         when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(new ArrayList<Aluno>());
         sut.registerFacade(facadeMock);
 
+        JButton searchButton = ((AlunoBuscarPanel) sut.getGui()).getBuscar();
+
         try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
             // Act
-            sut.buscar();
+            searchButton.doClick();
 
             // Assert
             optionPaneMock.verify(
@@ -85,17 +88,19 @@ public class AlunoBuscarViewTest {
         AppFacade facadeMock = mock(AppFacade.class); // Mock facade
         when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosSearchMock);
 
-        JTextField mockedTextFieldNome = new JTextField(faker.name().fullName());
-        JTextField mockedTextFieldRegistro = new JTextField(Long.toString(faker.random().nextLong()));
+        JTextField mockedTextFieldNome = spy(new JTextField(faker.name().fullName()));
+        JTextField mockedTextFieldRegistro = spy(new JTextField(Long.toString(faker.random().nextLong())));
 
         try (MockedConstruction<AlunoBuscarPanel> mocked = mockConstruction(
                 AlunoBuscarPanel.class,
                 GetAlunoBuscarPanelMock(mockedTextFieldNome, mockedTextFieldRegistro))) {
+
             AlunoBuscarView sut = new AlunoBuscarView();
             sut.registerFacade(facadeMock);
+            JButton searchButton = ((AlunoBuscarPanel) sut.getGui()).getBuscar();
 
             // Act
-            sut.buscar();
+            searchButton.doClick();
 
             // Assert
             assertThat(alunoTableMock.getRowCount()).isEqualTo(alunosAmount);
@@ -126,9 +131,10 @@ public class AlunoBuscarViewTest {
 
         AlunoBuscarView sut = new AlunoBuscarView();
         sut.registerFacade(facadeMock);
+        JButton searchButton = ((AlunoBuscarPanel) sut.getGui()).getBuscar();
 
         // Act
-        sut.buscar();
+        searchButton.doClick();
 
         // Assert
         assertThat(sut.getAlunoList().size()).isEqualTo(alunosAmount);
@@ -138,17 +144,19 @@ public class AlunoBuscarViewTest {
     @Test
     public void Buscar_InserirRegistroComLetras_ExibirAlertaDeRegistroInvalido() {
         // Arrange
-        JTextField mockedTextFieldRegistro = new JTextField(fakeValuesService.regexify("[a-zA-Z]+"));
-        JTextField mockedTextFieldNome = new JTextField("");
+        JTextField mockedTextFieldRegistro = spy(new JTextField(fakeValuesService.regexify("[a-zA-Z]+")));
+        JTextField mockedTextFieldNome = spy(new JTextField(""));
 
         try (MockedConstruction<AlunoBuscarPanel> mocked = mockConstruction(
                 AlunoBuscarPanel.class,
                 GetAlunoBuscarPanelMock(mockedTextFieldNome, mockedTextFieldRegistro))) {
+
             AlunoBuscarView sut = new AlunoBuscarView();
+            JButton searchButton = ((AlunoBuscarPanel) sut.getGui()).getBuscar();
 
             try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
                 // Act
-                sut.buscar();
+                searchButton.doClick();
 
                 // Assert
                 optionPaneMock.verify(
@@ -164,16 +172,19 @@ public class AlunoBuscarViewTest {
     {
         return (alunoPanelMock, context) -> 
         {
-            BuscaCamposPanel buscaCampoPanelMock = mock(BuscaCamposPanel.class); // Mock campos de busca
+            // Mock campos de busca
+            BuscaCamposPanel buscaCampoPanelMock = mock(BuscaCamposPanel.class); 
             when(buscaCampoPanelMock.getNome()).thenReturn(mockedTextFieldNome);
             when(buscaCampoPanelMock.getRegistroFpij()).thenReturn(mockedTextFieldRegistro);
             when(alunoPanelMock.getBuscaCamposPanel()).thenReturn(buscaCampoPanelMock);
 
-            JButton buttonMock = mock(JButton.class); // Mock botão de busca
-            doNothing().when(buttonMock).addActionListener(any());
+            // Mock botão de busca
+            JButton buttonMock = spy(new JButton());
+            doCallRealMethod().when(buttonMock).addActionListener(any(AlunoBuscarView.BuscarActionHandler.class));
             when(alunoPanelMock.getBuscar()).thenReturn(buttonMock);
 
-            when(alunoPanelMock.getAlunoTable()).thenReturn(alunoTableMock); // Mock tabela de alunos
+            // Mock tabela de alunos
+            when(alunoPanelMock.getAlunoTable()).thenReturn(alunoTableMock);
         };
     }
 }

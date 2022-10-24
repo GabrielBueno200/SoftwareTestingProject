@@ -32,18 +32,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedConstruction;
+import org.mockito.MockedConstruction.MockInitializer;
 import org.mockito.MockedStatic;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.service.FakeValuesService;
+import com.github.javafaker.service.RandomService;
 
 public class AlunoBuscarViewTest {
     private static JTable alunoTableMock;
     private static Faker faker;
+    private static FakeValuesService fakeValuesService;
 
     @BeforeAll
     public static void setUp() {
         alunoTableMock = new AlunoEmptyTableMock();
         faker = new Faker(new Locale("pt-BR"));
+        fakeValuesService = new FakeValuesService(
+                new Locale("pt-BR"), new RandomService());
     }
 
     @Test
@@ -79,20 +85,12 @@ public class AlunoBuscarViewTest {
         AppFacade facadeMock = mock(AppFacade.class); // Mock facade
         when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosListMock);
 
-        try (MockedConstruction<AlunoBuscarPanel> mocked = mockConstruction(AlunoBuscarPanel.class,
-            (alunoPanelMock, context) -> {
-                BuscaCamposPanel buscaCampoPanelMock = mock(BuscaCamposPanel.class); // Mock campos de busca
-                when(buscaCampoPanelMock.getNome()).thenReturn(new JTextField(faker.name().fullName()));
-                when(buscaCampoPanelMock.getRegistroFpij()).thenReturn(new JTextField(Long.toString(faker.random().nextLong())));
-                when(alunoPanelMock.getBuscaCamposPanel()).thenReturn(buscaCampoPanelMock);
-                
-                JButton buttonMock = mock(JButton.class); // Mock botão de busca
-                doNothing().when(buttonMock).addActionListener(any());
-                when(alunoPanelMock.getBuscar()).thenReturn(buttonMock);
+        JTextField mockedTextFieldNome = new JTextField(faker.name().fullName());
+        JTextField mockedTextFieldRegistro = new JTextField(Long.toString(faker.random().nextLong()));
 
-                when(alunoPanelMock.getAlunoTable()).thenReturn(alunoTableMock); // Mock tabela de alunos
-            }
-        )) {
+        try (MockedConstruction<AlunoBuscarPanel> mocked = mockConstruction(
+                AlunoBuscarPanel.class,
+                GetAlunoBuscarPanelMock(mockedTextFieldNome, mockedTextFieldRegistro))) {
             AlunoBuscarView sut = new AlunoBuscarView();
             sut.registerFacade(facadeMock);
 
@@ -101,9 +99,8 @@ public class AlunoBuscarViewTest {
 
             // Assert
             assertThat(alunoTableMock.getRowCount()).isEqualTo(alunosAmount);
-            
-            for(int i = 0; i < alunoTableMock.getRowCount(); i++)
-            {
+
+            for (int i = 0; i < alunoTableMock.getRowCount(); i++) {
                 String registroColumnValue = alunoTableMock.getValueAt(i, 0).toString();
                 String nomeColumnValue = alunoTableMock.getValueAt(i, 1).toString();
                 String professorColumnValue = alunoTableMock.getValueAt(i, 2).toString();
@@ -114,7 +111,7 @@ public class AlunoBuscarViewTest {
                 assertThat(professorColumnValue).isEqualTo(alunosListMock.get(i).getProfessor().getFiliado().getNome());
                 assertThat(entidadeColumnValue).isEqualTo(alunosListMock.get(i).getEntidade().getNome());
             }
-        };
+        }
     }
 
     @ParameterizedTest
@@ -135,5 +132,47 @@ public class AlunoBuscarViewTest {
         // Assert
         assertThat(sut.getAlunoList().size()).isEqualTo(alunosAmount);
         assertThat(sut.getAlunoList()).isEqualTo(alunosListMock);
+    }
+
+    @Test
+    public void Buscar_InserirRegistroComLetras_ExibirAlertaDeRegistroInvalido() {
+        // Arrange
+        JTextField mockedTextFieldRegistro = new JTextField(fakeValuesService.regexify("[a-zA-Z]+"));
+        JTextField mockedTextFieldNome = new JTextField("");
+
+        try (MockedConstruction<AlunoBuscarPanel> mocked = mockConstruction(
+                AlunoBuscarPanel.class,
+                GetAlunoBuscarPanelMock(mockedTextFieldNome, mockedTextFieldRegistro))) {
+            AlunoBuscarView sut = new AlunoBuscarView();
+
+            try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
+                // Act
+                sut.buscar();
+
+                // Assert
+                optionPaneMock.verify(
+                        () -> JOptionPane.showMessageDialog(
+                                any(Component.class),
+                                eq("Nº de Registro inválido! No resgistro só pode haver números.")),
+                        times(1));
+            }
+        }
+    }
+
+    private MockInitializer<AlunoBuscarPanel> GetAlunoBuscarPanelMock(JTextField mockedTextFieldNome, JTextField mockedTextFieldRegistro)
+    {
+        return (alunoPanelMock, context) -> 
+        {
+            BuscaCamposPanel buscaCampoPanelMock = mock(BuscaCamposPanel.class); // Mock campos de busca
+            when(buscaCampoPanelMock.getNome()).thenReturn(mockedTextFieldNome);
+            when(buscaCampoPanelMock.getRegistroFpij()).thenReturn(mockedTextFieldRegistro);
+            when(alunoPanelMock.getBuscaCamposPanel()).thenReturn(buscaCampoPanelMock);
+
+            JButton buttonMock = mock(JButton.class); // Mock botão de busca
+            doNothing().when(buttonMock).addActionListener(any());
+            when(alunoPanelMock.getBuscar()).thenReturn(buttonMock);
+
+            when(alunoPanelMock.getAlunoTable()).thenReturn(alunoTableMock); // Mock tabela de alunos
+        };
     }
 }

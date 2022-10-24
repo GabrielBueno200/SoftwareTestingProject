@@ -26,10 +26,10 @@ public class AlunoMock {
                 new Locale("pt-BR"), new RandomService());
     }
 
-    public List<Aluno> getAlunosMock(int quantidade) {
+    public List<Aluno> getAlunosMock(int alunosAmount) {
         ArrayList<Aluno> alunos = new ArrayList<>();
 
-        for (int i = 0; i < quantidade; i++) {
+        for (int i = 0; i < alunosAmount; i++) {
             Professor professor = new Professor();
             professor.setFiliado(new Filiado());
             professor.getFiliado().setNome(faker.name().fullName());

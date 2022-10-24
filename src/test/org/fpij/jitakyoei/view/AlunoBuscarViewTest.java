@@ -80,10 +80,10 @@ public class AlunoBuscarViewTest {
     @ValueSource(ints = { 2, 3, 4, 5 })
     public void Buscar_AposBuscarAlunosValidos_TabelaDeveConterOsAlunos(int alunosAmount) {
         // Arrange
-        List<Aluno> alunosListMock = new AlunoMock().getAlunosMock(alunosAmount);
+        List<Aluno> alunosSearchMock = new AlunoMock().getAlunosMock(alunosAmount);
 
         AppFacade facadeMock = mock(AppFacade.class); // Mock facade
-        when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosListMock);
+        when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosSearchMock);
 
         JTextField mockedTextFieldNome = new JTextField(faker.name().fullName());
         JTextField mockedTextFieldRegistro = new JTextField(Long.toString(faker.random().nextLong()));
@@ -106,10 +106,11 @@ public class AlunoBuscarViewTest {
                 String professorColumnValue = alunoTableMock.getValueAt(i, 2).toString();
                 String entidadeColumnValue = alunoTableMock.getValueAt(i, 3).toString();
 
-                assertThat(registroColumnValue).isEqualTo(Long.toString(alunosListMock.get(i).getFiliado().getId()));
-                assertThat(nomeColumnValue).isEqualTo(alunosListMock.get(i).getFiliado().getNome());
-                assertThat(professorColumnValue).isEqualTo(alunosListMock.get(i).getProfessor().getFiliado().getNome());
-                assertThat(entidadeColumnValue).isEqualTo(alunosListMock.get(i).getEntidade().getNome());
+                assertThat(registroColumnValue).isEqualTo(Long.toString(alunosSearchMock.get(i).getFiliado().getId()));
+                assertThat(nomeColumnValue).isEqualTo(alunosSearchMock.get(i).getFiliado().getNome());
+                assertThat(professorColumnValue)
+                        .isEqualTo(alunosSearchMock.get(i).getProfessor().getFiliado().getNome());
+                assertThat(entidadeColumnValue).isEqualTo(alunosSearchMock.get(i).getEntidade().getNome());
             }
         }
     }
@@ -118,10 +119,10 @@ public class AlunoBuscarViewTest {
     @ValueSource(ints = { 2, 3, 4, 5 })
     public void Buscar_AposBuscarAlunosValidos_ListaDeAlunosDeveEstarPreenchida(int alunosAmount) {
         // Arrange
-        List<Aluno> alunosListMock = new AlunoMock().getAlunosMock(alunosAmount);
+        List<Aluno> alunosSearchMock = new AlunoMock().getAlunosMock(alunosAmount);
 
         AppFacade facadeMock = mock(AppFacade.class);
-        when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosListMock);
+        when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosSearchMock);
 
         AlunoBuscarView sut = new AlunoBuscarView();
         sut.registerFacade(facadeMock);
@@ -131,7 +132,7 @@ public class AlunoBuscarViewTest {
 
         // Assert
         assertThat(sut.getAlunoList().size()).isEqualTo(alunosAmount);
-        assertThat(sut.getAlunoList()).isEqualTo(alunosListMock);
+        assertThat(sut.getAlunoList()).isEqualTo(alunosSearchMock);
     }
 
     @Test

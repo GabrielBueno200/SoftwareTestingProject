@@ -154,9 +154,9 @@ public class ProfessorBuscarViewTest {
             when(professorPanelMock.getBuscaCamposPanel()).thenReturn(buscaCampoPanelMock);
 
             // Mock botão de busca
-            JButton buttonMock = spy(new JButton());
-            doCallRealMethod().when(buttonMock).addActionListener(any(ProfessorBuscarView.BuscarActionHandler.class));
-            when(professorPanelMock.getBuscar()).thenReturn(buttonMock);
+            JButton buttonSpy = spy(new JButton());
+            doCallRealMethod().when(buttonSpy).addActionListener(any(ProfessorBuscarView.BuscarActionHandler.class));
+            when(professorPanelMock.getBuscar()).thenReturn(buttonSpy);
 
             // Mock tabela de professores
             when(professorPanelMock.getProfessores()).thenReturn(professorTableMock);

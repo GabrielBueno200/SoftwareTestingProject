@@ -179,9 +179,9 @@ public class AlunoBuscarViewTest {
             when(alunoPanelMock.getBuscaCamposPanel()).thenReturn(buscaCampoPanelMock);
 
             // Mock botão de busca
-            JButton buttonMock = spy(new JButton());
-            doCallRealMethod().when(buttonMock).addActionListener(any(AlunoBuscarView.BuscarActionHandler.class));
-            when(alunoPanelMock.getBuscar()).thenReturn(buttonMock);
+            JButton buttonSpy = spy(new JButton());
+            doCallRealMethod().when(buttonSpy).addActionListener(any(AlunoBuscarView.BuscarActionHandler.class));
+            when(alunoPanelMock.getBuscar()).thenReturn(buttonSpy);
 
             // Mock tabela de alunos
             when(alunoPanelMock.getAlunoTable()).thenReturn(alunoTableMock);

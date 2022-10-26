@@ -23,11 +23,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.fpij.jitakyoei.facade.AppFacade;
+import org.fpij.jitakyoei.mocks.AlunoEmptyTableMock;
+import org.fpij.jitakyoei.mocks.AlunoMock;
 import org.fpij.jitakyoei.model.beans.Aluno;
 import org.fpij.jitakyoei.view.gui.AlunoBuscarPanel;
 import org.fpij.jitakyoei.view.gui.BuscaCamposPanel;
-import org.fpijk.jutakyoei.mocks.AlunoEmptyTableMock;
-import org.fpijk.jutakyoei.mocks.AlunoMock;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -72,7 +72,7 @@ public class AlunoBuscarViewTest {
             optionPaneMock.verify(
                     () -> JOptionPane.showMessageDialog(
                             any(Component.class),
-                            eq("Aluno não encontrado!"),
+                            eq("Não foram encontrados alunos com os dados fornecidos!"),
                             anyString(),
                             eq(JOptionPane.ERROR_MESSAGE)),
                     times(1));
@@ -83,7 +83,7 @@ public class AlunoBuscarViewTest {
     @ValueSource(ints = { 2, 3, 4, 5 })
     public void Buscar_AposBuscarAlunosValidos_TabelaDeveConterOsAlunos(int alunosAmount) {
         // Arrange
-        List<Aluno> alunosSearchMock = new AlunoMock().getAlunosMock(alunosAmount);
+        List<Aluno> alunosSearchMock = new AlunoMock().GetAlunosMock(alunosAmount);
 
         AppFacade facadeMock = mock(AppFacade.class); // Mock facade
         when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosSearchMock);
@@ -124,7 +124,7 @@ public class AlunoBuscarViewTest {
     @ValueSource(ints = { 2, 3, 4, 5 })
     public void Buscar_AposBuscarAlunosValidos_ListaDeAlunosDeveEstarPreenchida(int alunosAmount) {
         // Arrange
-        List<Aluno> alunosSearchMock = new AlunoMock().getAlunosMock(alunosAmount);
+        List<Aluno> alunosSearchMock = new AlunoMock().GetAlunosMock(alunosAmount);
 
         AppFacade facadeMock = mock(AppFacade.class);
         when(facadeMock.searchAluno(any(Aluno.class))).thenReturn(alunosSearchMock);

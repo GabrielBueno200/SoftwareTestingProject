@@ -2,40 +2,74 @@ package org.fpij.jitakyoei.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockConstruction;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JButton;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import java.awt.Component;
 import org.fpij.jitakyoei.facade.AppFacade;
+import org.fpij.jitakyoei.mocks.EntidadeEmptyTableMock;
+import org.fpij.jitakyoei.mocks.EntidadeMock;
 import org.fpij.jitakyoei.model.beans.Entidade;
 import org.fpij.jitakyoei.view.gui.EntidadeBuscarPanel;
-import org.fpijk.jutakyoei.mocks.EntidadeEmptyTableMock;
-import org.fpijk.jutakyoei.mocks.EntidadeMock;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedConstruction;
+import org.mockito.MockedStatic;
 import org.mockito.MockedConstruction.MockInitializer;
 
 import com.github.javafaker.Faker;
 
 public class EntidadeBuscarViewTest {
-    private static JTable entidadeTableMock;
+    private static EntidadeEmptyTableMock entidadeTableMock;
     private static Faker faker;
 
     @BeforeAll
     public static void setUp() {
         entidadeTableMock = new EntidadeEmptyTableMock();
         faker = new Faker(new Locale("pt-BR"));
+    }
+
+    @Test
+    public void Buscar_AoPesquisarEntidadeInexistente_ExibirAlertaEntidadeNaoEncontrada() {
+        // Arrange
+        EntidadeBuscarView sut = new EntidadeBuscarView();
+
+        AppFacade facadeMock = mock(AppFacade.class);
+        when(facadeMock.searchEntidade(any(Entidade.class))).thenReturn(new ArrayList<Entidade>());
+        sut.registerFacade(facadeMock);
+
+        JButton searchButton = ((EntidadeBuscarPanel) sut.getGui()).getBtnBuscar();
+
+        try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
+            // Act
+            searchButton.doClick();
+
+            // Assert
+            optionPaneMock.verify(
+                    () -> JOptionPane.showMessageDialog(
+                            any(Component.class),
+                            eq("Não foram encontradas entidades com os dados fornecidos!"),
+                            anyString(),
+                            eq(JOptionPane.ERROR_MESSAGE)),
+                    times(1));
+        }
     }
 
     @ParameterizedTest

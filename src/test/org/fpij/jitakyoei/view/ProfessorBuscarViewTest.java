@@ -23,11 +23,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.fpij.jitakyoei.facade.AppFacade;
+import org.fpij.jitakyoei.mocks.ProfessorEmptyTableMock;
+import org.fpij.jitakyoei.mocks.ProfessorMock;
 import org.fpij.jitakyoei.model.beans.Professor;
 import org.fpij.jitakyoei.view.gui.BuscaCamposPanel;
 import org.fpij.jitakyoei.view.gui.ProfessorBuscarPanel;
-import org.fpijk.jutakyoei.mocks.ProfessorEmptyTableMock;
-import org.fpijk.jutakyoei.mocks.ProfessorMock;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -99,7 +99,7 @@ public class ProfessorBuscarViewTest {
             optionPaneMock.verify(
                     () -> JOptionPane.showMessageDialog(
                             any(Component.class),
-                            eq("Professor não encontrado!"),
+                            eq("Não foram encontrados professores com os dados fornecidos!"),
                             anyString(),
                             eq(JOptionPane.ERROR_MESSAGE)),
                     times(1));

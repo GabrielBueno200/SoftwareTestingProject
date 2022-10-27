@@ -4,7 +4,11 @@ import org.fpij.jitakyoei.mocks.AlunoMock;
 import org.fpij.jitakyoei.model.beans.Aluno;
 
 public class AlunoMockBuilder {
-    private Aluno alunoInstance = new AlunoMock().GetAlunoMock();;
+    private Aluno alunoInstance;
+
+    public AlunoMockBuilder() {
+        alunoInstance = new AlunoMock().GetAlunoMock();
+    }
     
     public AlunoMockBuilder WithNome(String nome){
         alunoInstance.getFiliado().setNome(nome);

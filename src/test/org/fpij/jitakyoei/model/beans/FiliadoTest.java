@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class FiliadoTest {    
+public class FiliadoTest {
     @ParameterizedTest
     @ValueSource(strings = {"12345678910","12@45678910", "55824809923", "1234567891011"})
     public void CpfDeveConterApenas11CaracteresNumericos(String cpf) {

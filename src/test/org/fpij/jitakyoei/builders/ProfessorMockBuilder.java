@@ -8,7 +8,11 @@ import org.fpij.jitakyoei.model.beans.Entidade;
 import org.fpij.jitakyoei.model.beans.Professor;
 
 public class ProfessorMockBuilder {
-    private Professor professorInstance = new ProfessorMock().GetProfessorMock();;
+    private Professor professorInstance;
+
+    public ProfessorMockBuilder() {
+        professorInstance = new ProfessorMock().GetProfessorMock();
+    }
     
     public ProfessorMockBuilder WithNome(String nome){
         professorInstance.getFiliado().setNome(nome);

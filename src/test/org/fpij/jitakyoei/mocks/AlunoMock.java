@@ -1,4 +1,4 @@
-package org.fpij.jutakyoei.mocks;
+package org.fpij.jitakyoei.mocks;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -24,5 +24,4 @@ public class AlunoMockBuilder {
     public Aluno Build(){
         return alunoInstance;
     }
-
 }

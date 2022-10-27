@@ -23,7 +23,18 @@ public class EntidadeMock {
                 new Locale("pt-BR"), new RandomService());
     }
 
-    public List<Entidade> getEntidadesMock(int entidadesAmount) {
+    public Entidade GetEntidadeMock() {
+        Entidade entidade = new Entidade();
+
+        entidade.setNome(faker.company().name());
+        entidade.setCnpj(fakeValuesService.regexify(regexCNPJ));
+        entidade.setTelefone1(faker.phoneNumber().phoneNumber());
+        entidade.setTelefone2(faker.phoneNumber().cellPhone());
+
+        return entidade;
+    }
+
+    public List<Entidade> GetEntidadesMock(int entidadesAmount) {
         ArrayList<Entidade> entidades = new ArrayList<>();
 
         for (int i = 0; i < entidadesAmount; i++) {

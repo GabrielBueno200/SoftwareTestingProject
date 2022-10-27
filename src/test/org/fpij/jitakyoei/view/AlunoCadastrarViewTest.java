@@ -33,7 +33,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = {"", " "})
-    public void Cadastrar_NomeVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty){
+    public void Cadastrar_AlunoComNomeVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty){
         Aluno aluno = new AlunoMockBuilder()
                         .WithNome(nomeNullOrEmpty)
                         .Build();
@@ -44,7 +44,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = {"Gabriel 123", "@Henrique"})
-    public void Cadastrar_NomeComCaracteresInvalidos_ExibirAlertaDeNomeInvalido(String invalidNome){
+    public void Cadastrar_AlunoComNomeComCaracteresInvalidos_ExibirAlertaDeNomeInvalido(String invalidNome){
         Aluno aluno = new AlunoMockBuilder()
                         .WithNome(invalidNome)
                         .Build();
@@ -55,7 +55,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = {"", " "})
-    public void Cadastrar_RegistroCbjVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String registroCbjNullOrEmpty){
+    public void Cadastrar_AlunoComRegistroCbjVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String registroCbjNullOrEmpty){
         Aluno aluno = new AlunoMockBuilder()
                         .WithRegistroCbj(registroCbjNullOrEmpty)
                         .Build();
@@ -66,7 +66,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = {"123abc", "cdf@#"})
-    public void Cadastrar_RegistroCbjComCaracteresInvalidos_ExibirAlertaDeRegistroCbjInvalido(String invalidRegistroCbj){
+    public void Cadastrar_AlunoComRegistroCbjComCaracteresInvalidos_ExibirAlertaDeRegistroCbjInvalido(String invalidRegistroCbj){
         Aluno aluno = new AlunoMockBuilder()
                         .WithRegistroCbj(invalidRegistroCbj)
                         .Build();
@@ -77,7 +77,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = {"", " "})
-    public void Cadastrar_CpfVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String cpfNullOrEmpty){
+    public void Cadastrar_AlunoComCpfVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String cpfNullOrEmpty){
         Aluno aluno = new AlunoMockBuilder()
                         .WithCpf(cpfNullOrEmpty)
                         .Build();

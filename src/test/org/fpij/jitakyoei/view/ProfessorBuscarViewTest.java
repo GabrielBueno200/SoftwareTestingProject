@@ -110,7 +110,7 @@ public class ProfessorBuscarViewTest {
     @ValueSource(ints = { 2, 3, 4, 5 })
     public void Buscar_AposBuscarProfessoresValidos_TabelaDeveConterOsProfessores(int professoresAmount) {
         // Arrange
-        List<Professor> professoresSearchMock = new ProfessorMock().getProfessoresMock(professoresAmount);
+        List<Professor> professoresSearchMock = new ProfessorMock().GetProfessoresMock(professoresAmount);
 
         AppFacade facadeMock = mock(AppFacade.class); // Mock facade
         when(facadeMock.searchProfessor(any(Professor.class))).thenReturn(professoresSearchMock);

@@ -76,7 +76,7 @@ public class EntidadeBuscarViewTest {
     @ValueSource(ints = { 2, 3, 4, 5 })
     public void Buscar_AposBuscarEntidadesValidas_TabelaDeveConterAsEntidades(int entidadesAmount) {
         // Arrange
-        List<Entidade> entidadesSearchMock = new EntidadeMock().getEntidadesMock(entidadesAmount);
+        List<Entidade> entidadesSearchMock = new EntidadeMock().GetEntidadesMock(entidadesAmount);
 
         AppFacade facadeMock = mock(AppFacade.class);
         when(facadeMock.searchEntidade(any(Entidade.class))).thenReturn(entidadesSearchMock);

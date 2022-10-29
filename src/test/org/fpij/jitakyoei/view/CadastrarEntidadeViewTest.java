@@ -33,6 +33,17 @@ public class CadastrarEntidadeViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = {"", " "})
+    public void Cadastrar_EntidadeComCnpjVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty){
+        Entidade entidade = new EntidadeMockBuilder()
+                        .WithCnpj(nomeNullOrEmpty)
+                        .Build();
+        
+        TestarEntidadeComCampoVazioOuInvalido(entidade, "O campo 'cnpj' é obrigatório");
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = {"", " "})
     public void Cadastrar_EntidadeComNomeVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty){
         Entidade entidade = new EntidadeMockBuilder()
                         .WithNome(nomeNullOrEmpty)

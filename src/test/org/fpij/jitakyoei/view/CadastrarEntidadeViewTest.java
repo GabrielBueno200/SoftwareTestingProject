@@ -32,26 +32,26 @@ import org.mockito.MockedStatic;
 public class CadastrarEntidadeViewTest {
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"", " "})
-    public void Cadastrar_EntidadeComCnpjVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty){
+    @ValueSource(strings = { "", " " })
+    public void Cadastrar_EntidadeComCnpjVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String cnpjNullOrEmpty) {
         Entidade entidade = new EntidadeMockBuilder()
-                        .WithCnpj(nomeNullOrEmpty)
-                        .Build();
-        
+                .WithCnpj(cnpjNullOrEmpty)
+                .Build();
+
         TestarEntidadeComCampoVazioOuInvalido(entidade, "O campo 'cnpj' é obrigatório");
     }
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"", " "})
-    public void Cadastrar_EntidadeComNomeVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty){
+    @ValueSource(strings = { "", " " })
+    public void Cadastrar_EntidadeComNomeVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty) {
         Entidade entidade = new EntidadeMockBuilder()
-                        .WithNome(nomeNullOrEmpty)
-                        .Build();
-        
+                .WithNome(nomeNullOrEmpty)
+                .Build();
+
         TestarEntidadeComCampoVazioOuInvalido(entidade, "O campo 'nome' é obrigatório");
     }
-    
+
     private void TestarEntidadeComCampoVazioOuInvalido(Entidade entidade, String expectedErrorMessage) {
         // Arrange
         MainAppView mainAppViewMock = mock(MainAppView.class);

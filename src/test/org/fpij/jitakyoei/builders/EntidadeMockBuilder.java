@@ -9,9 +9,14 @@ public class EntidadeMockBuilder {
     public EntidadeMockBuilder() {
         entidadeInstance = new EntidadeMock().GetEntidadeMock();
     }
-    
-    public EntidadeMockBuilder WithNome(String nome){
+
+    public EntidadeMockBuilder WithNome(String nome) {
         entidadeInstance.setNome(nome);
+        return this;
+    }
+
+    public EntidadeMockBuilder WithCnpj(String cnpj) {
+        entidadeInstance.setCnpj(cnpj);
         return this;
     }
 
@@ -20,7 +25,7 @@ public class EntidadeMockBuilder {
         return this;
     }
 
-    public Entidade Build(){
+    public Entidade Build() {
         return entidadeInstance;
     }
 }

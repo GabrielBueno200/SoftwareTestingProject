@@ -13,14 +13,14 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
+import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import java.awt.Component;
-
-import org.fpij.jitakyoei.builders.AlunoMockBuilder;
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Aluno;
+import org.fpij.jitakyoei.utils.builders.AlunoMockBuilder;
 import org.fpij.jitakyoei.view.forms.AlunoForm;
 import org.fpij.jitakyoei.view.gui.AlunoCadastrarPanel;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,78 +32,79 @@ import org.mockito.MockedStatic;
 public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"", " "})
-    public void Cadastrar_AlunoComNomeVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty){
+    @ValueSource(strings = { "", " " })
+    public void Cadastrar_AlunoComNomeVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String nomeNullOrEmpty) {
         Aluno aluno = new AlunoMockBuilder()
-                        .WithNome(nomeNullOrEmpty)
-                        .Build();
-        
+                .WithNome(nomeNullOrEmpty)
+                .Build();
+
         TestarAlunoComCampoVazioOuInvalido(aluno, "O campo 'nome' é obrigatório");
     }
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"Gabriel 123", "@Henrique"})
-    public void Cadastrar_AlunoComNomeComCaracteresInvalidos_ExibirAlertaDeNomeInvalido(String invalidNome){
+    @ValueSource(strings = { "Gabriel 123", "@Henrique" })
+    public void Cadastrar_AlunoComNomeComCaracteresInvalidos_ExibirAlertaDeNomeInvalido(String invalidNome) {
         Aluno aluno = new AlunoMockBuilder()
-                        .WithNome(invalidNome)
-                        .Build();
-        
+                .WithNome(invalidNome)
+                .Build();
+
         TestarAlunoComCampoVazioOuInvalido(aluno, "O campo 'nome' deve conter apenas letras");
     }
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"", " "})
-    public void Cadastrar_AlunoComRegistroCbjVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String registroCbjNullOrEmpty){
+    @ValueSource(strings = { "", " " })
+    public void Cadastrar_AlunoComRegistroCbjVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String registroCbjNullOrEmpty) {
         Aluno aluno = new AlunoMockBuilder()
-                        .WithRegistroCbj(registroCbjNullOrEmpty)
-                        .Build();
-        
+                .WithRegistroCbj(registroCbjNullOrEmpty)
+                .Build();
+
         TestarAlunoComCampoVazioOuInvalido(aluno, "O campo 'Registro Cbj' é obrigatório");
     }
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"123abc", "cdf@#"})
-    public void Cadastrar_AlunoComRegistroCbjComCaracteresInvalidos_ExibirAlertaDeRegistroCbjInvalido(String invalidRegistroCbj){
+    @ValueSource(strings = { "123abc", "cdf@#" })
+    public void Cadastrar_AlunoComRegistroCbjComCaracteresInvalidos_ExibirAlertaDeRegistroCbjInvalido(
+            String invalidRegistroCbj) {
         Aluno aluno = new AlunoMockBuilder()
-                        .WithRegistroCbj(invalidRegistroCbj)
-                        .Build();
-        
+                .WithRegistroCbj(invalidRegistroCbj)
+                .Build();
+
         TestarAlunoComCampoVazioOuInvalido(aluno, "O campo 'Registro Cbj' deve conter apenas números");
     }
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"", " "})
-    public void Cadastrar_AlunoComCpfVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String cpfNullOrEmpty){
+    @ValueSource(strings = { "", " " })
+    public void Cadastrar_AlunoComCpfVazioOuNulo_ExibirAlertaDeCampoObrigatorio(String cpfNullOrEmpty) {
         Aluno aluno = new AlunoMockBuilder()
-                        .WithCpf(cpfNullOrEmpty)
-                        .Build();
-        
+                .WithCpf(cpfNullOrEmpty)
+                .Build();
+
         TestarAlunoComCampoVazioOuInvalido(aluno, "O campo 'CPF' é obrigatório");
     }
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"abc568978de", "@#1234567#@"})
-    public void Cadastrar_AlunoComCpfComCaracteresInvalidos_ExibirAlertaDeCpfInvalido(String invalidCpf){
+    @ValueSource(strings = { "abc568978de", "@#1234567#@" })
+    public void Cadastrar_AlunoComCpfComCaracteresInvalidos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Aluno aluno = new AlunoMockBuilder()
-                        .WithCpf(invalidCpf)
-                        .Build();
-        
+                .WithCpf(invalidCpf)
+                .Build();
+
         TestarAlunoComCampoVazioOuInvalido(aluno, "O campo 'CPF' deve conter apenas números");
     }
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"1111111111123", "123456", "1234567891011"})
-    public void Cadastrar_AlunoComCpfMaiorOuMenorQue11Digitos_ExibirAlertaDeCpfInvalido(String invalidCpf){
+    @ValueSource(strings = { "1111111111123", "123456", "1234567891011" })
+    public void Cadastrar_AlunoComCpfMaiorOuMenorQue11Digitos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Aluno aluno = new AlunoMockBuilder()
-                        .WithCpf(invalidCpf)
-                        .Build();
-        
+                .WithCpf(invalidCpf)
+                .Build();
+
         TestarAlunoComCampoVazioOuInvalido(aluno, "O campo 'CPF' deve conter 11 dígitos!");
     }
 

@@ -18,9 +18,9 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import org.fpij.jitakyoei.builders.EntidadeMockBuilder;
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Entidade;
+import org.fpij.jitakyoei.utils.builders.EntidadeMockBuilder;
 import org.fpij.jitakyoei.view.forms.EntidadeForm;
 import org.fpij.jitakyoei.view.gui.EntidadeCadastrarPanel;
 import org.junit.jupiter.params.ParameterizedTest;

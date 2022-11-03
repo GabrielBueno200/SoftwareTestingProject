@@ -23,9 +23,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.fpij.jitakyoei.facade.AppFacade;
-import org.fpij.jitakyoei.mocks.AlunoEmptyTableMock;
-import org.fpij.jitakyoei.mocks.AlunoMock;
 import org.fpij.jitakyoei.model.beans.Aluno;
+import org.fpij.jitakyoei.utils.mocks.AlunoEmptyTableMock;
+import org.fpij.jitakyoei.utils.mocks.AlunoMock;
 import org.fpij.jitakyoei.view.gui.AlunoBuscarPanel;
 import org.fpij.jitakyoei.view.gui.BuscaCamposPanel;
 import org.junit.jupiter.api.BeforeAll;

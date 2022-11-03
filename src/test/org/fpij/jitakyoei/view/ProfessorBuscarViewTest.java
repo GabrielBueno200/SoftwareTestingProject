@@ -23,9 +23,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.fpij.jitakyoei.facade.AppFacade;
-import org.fpij.jitakyoei.mocks.ProfessorEmptyTableMock;
-import org.fpij.jitakyoei.mocks.ProfessorMock;
 import org.fpij.jitakyoei.model.beans.Professor;
+import org.fpij.jitakyoei.utils.mocks.ProfessorEmptyTableMock;
+import org.fpij.jitakyoei.utils.mocks.ProfessorMock;
 import org.fpij.jitakyoei.view.gui.BuscaCamposPanel;
 import org.fpij.jitakyoei.view.gui.ProfessorBuscarPanel;
 import org.junit.jupiter.api.BeforeAll;

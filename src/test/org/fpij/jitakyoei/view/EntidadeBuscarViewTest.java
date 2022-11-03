@@ -12,6 +12,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -20,19 +21,18 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import java.awt.Component;
 import org.fpij.jitakyoei.facade.AppFacade;
-import org.fpij.jitakyoei.mocks.EntidadeEmptyTableMock;
-import org.fpij.jitakyoei.mocks.EntidadeMock;
 import org.fpij.jitakyoei.model.beans.Entidade;
+import org.fpij.jitakyoei.utils.mocks.EntidadeEmptyTableMock;
+import org.fpij.jitakyoei.utils.mocks.EntidadeMock;
 import org.fpij.jitakyoei.view.gui.EntidadeBuscarPanel;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedConstruction;
-import org.mockito.MockedStatic;
 import org.mockito.MockedConstruction.MockInitializer;
+import org.mockito.MockedStatic;
 
 import com.github.javafaker.Faker;
 

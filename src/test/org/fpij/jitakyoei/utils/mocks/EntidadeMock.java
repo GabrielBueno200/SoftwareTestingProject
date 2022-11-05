@@ -37,16 +37,8 @@ public class EntidadeMock {
     public List<Entidade> GetEntidadesMock(int entidadesAmount) {
         ArrayList<Entidade> entidades = new ArrayList<>();
 
-        for (int i = 0; i < entidadesAmount; i++) {
-            Entidade entidade = new Entidade();
-
-            entidade.setNome(faker.company().name());
-            entidade.setCnpj(fakeValuesService.regexify(regexCNPJ));
-            entidade.setTelefone1(faker.phoneNumber().phoneNumber());
-            entidade.setTelefone2(faker.phoneNumber().cellPhone());
-
-            entidades.add(entidade);
-        }
+        for (int i = 0; i < entidadesAmount; i++)
+            entidades.add(GetEntidadeMock());
 
         return entidades;
     }

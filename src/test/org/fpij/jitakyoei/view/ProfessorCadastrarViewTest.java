@@ -45,7 +45,7 @@ public class ProfessorCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = { "Gabriel 123", "@Henrique" })
-    public void Cadastrar_ProfessorComNomeComCaracteresInvalidos_ExibirAlertaDeNomeInvalido(String invalidNome) {
+    public void Cadastrar_ProfessorComNomeComCaracteresNaoAlfabeticos_ExibirAlertaDeNomeInvalido(String invalidNome) {
         Professor professor = new ProfessorMockBuilder()
                 .WithNome(invalidNome)
                 .Build();
@@ -110,10 +110,6 @@ public class ProfessorCadastrarViewTest {
         TestarProfessorComCampoVazioOuInvalido(professor, "O campo 'CPF' deve conter 11 dígitos!");
     }
 
-    /**
-     * @param professor
-     * @param expectedErrorMessage
-     */
     private void TestarProfessorComCampoVazioOuInvalido(Professor professor, String expectedErrorMessage) {
         // Arrange
         MainAppView mainAppViewMock = mock(MainAppView.class);

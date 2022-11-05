@@ -68,7 +68,7 @@ public class ProfessorCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = { "123abc", "cdf@#" })
-    public void Cadastrar_ProfessorComRegistroCbjComCaracteresInvalidos_ExibirAlertaDeRegistroCbjInvalido(
+    public void Cadastrar_ProfessorComRegistroCbjComCaracteresNaoNumericos_ExibirAlertaDeRegistroCbjInvalido(
             String invalidRegistroCbj) {
         Professor professor = new ProfessorMockBuilder()
                 .WithRegistroCbj(invalidRegistroCbj)

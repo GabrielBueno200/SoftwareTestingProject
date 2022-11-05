@@ -44,7 +44,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = { "Gabriel 123", "@Henrique" })
-    public void Cadastrar_AlunoComNomeComCaracteresInvalidos_ExibirAlertaDeNomeInvalido(String invalidNome) {
+    public void Cadastrar_AlunoComNomeComCaracteresNaoAlfabeticos_ExibirAlertaDeNomeInvalido(String invalidNome) {
         Aluno aluno = new AlunoMockBuilder()
                 .WithNome(invalidNome)
                 .Build();
@@ -66,7 +66,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = { "123abc", "cdf@#" })
-    public void Cadastrar_AlunoComRegistroCbjComCaracteresInvalidos_ExibirAlertaDeRegistroCbjInvalido(
+    public void Cadastrar_AlunoComRegistroCbjComCaracteresNaoNumericos_ExibirAlertaDeRegistroCbjInvalido(
             String invalidRegistroCbj) {
         Aluno aluno = new AlunoMockBuilder()
                 .WithRegistroCbj(invalidRegistroCbj)
@@ -89,7 +89,7 @@ public class AlunoCadastrarViewTest {
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = { "abc568978de", "@#1234567#@" })
-    public void Cadastrar_AlunoComCpfComCaracteresInvalidos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
+    public void Cadastrar_AlunoComCpfComCaracteresNaoNumericos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Aluno aluno = new AlunoMockBuilder()
                 .WithCpf(invalidCpf)
                 .Build();

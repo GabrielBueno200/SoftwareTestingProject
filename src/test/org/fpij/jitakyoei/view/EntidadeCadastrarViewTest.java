@@ -13,10 +13,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
+import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
-import java.awt.Component;
 
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Entidade;
@@ -54,7 +54,7 @@ public class EntidadeCadastrarViewTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"55.555.555/55@-5", "55.555.555/55a-5" })
+    @ValueSource(strings = { "55.555.555/55@-5", "55.555.555/55a-5" })
     public void Cadastrar_EntidadeComCnpjComCaracteresNaoNumericos_ExibirAlertaDeCampoInvalido(String invalidCnjp) {
         Entidade entidade = new EntidadeMockBuilder()
                 .WithCnpj(invalidCnjp)
@@ -62,7 +62,6 @@ public class EntidadeCadastrarViewTest {
 
         TestarEntidadeComCampoVazioOuInvalido(entidade, "O campo 'CPNJ' deve conter apenas números");
     }
-
 
     private void TestarEntidadeComCampoVazioOuInvalido(Entidade entidade, String expectedErrorMessage) {
         // Arrange
@@ -78,7 +77,7 @@ public class EntidadeCadastrarViewTest {
                     EntidadeForm.class,
                     (professorFormMock, context) -> when(professorFormMock.getEntidade()).thenReturn(entidade))) {
 
-                ProfessorCadastrarView sut = new ProfessorCadastrarView(mainAppViewMock);
+                EntidadeCadastrarView sut = new EntidadeCadastrarView(mainAppViewMock);
                 sut.registerFacade(facadeMock);
 
                 JButton cadastrarButton = ((EntidadeCadastrarPanel) sut.getGui()).getCadastrarEntidade();

@@ -119,27 +119,24 @@ public class ProfessorAtualizarViewTest {
         doNothing().when(facadeMock).createProfessorEntidade(any(List.class));
 
         try (MockedConstruction<ProfessorAtualizarPanel> panelMockScope = mockConstruction(
-            ProfessorAtualizarPanel.class, 
-            (professorAtualizarPanelMock, context) -> AddButtonsMock(professorAtualizarPanelMock))
-        ){
+                ProfessorAtualizarPanel.class,
+                (professorAtualizarPanelMock, context) -> AddButtonsMock(professorAtualizarPanelMock))) {
             try (MockedConstruction<ProfessorForm> formMockScope = mockConstruction(
-                ProfessorForm.class, 
-                (professorFormMock, context) -> { 
-                    when(professorFormMock.getProfessor()).thenReturn(professor);
-                    when(professorFormMock.getEntidadesList()).thenReturn(professor.getEntidades());
-                })
-            ){
+                    ProfessorForm.class,
+                    (professorFormMock, context) -> {
+                        when(professorFormMock.getProfessor()).thenReturn(professor);
+                        when(professorFormMock.getEntidadesList()).thenReturn(professor.getEntidades());
+                    })) {
 
-                ProfessorCadastrarView sut = new ProfessorCadastrarView(mainAppViewMock);
+                ProfessorAtualizarView sut = new ProfessorAtualizarView(mainAppViewMock, mock(Professor.class));
                 sut.registerFacade(facadeMock);
 
-                JButton cadastrarButton = ((ProfessorAtualizarPanel)sut.getGui()).getAtualizar();
-                
-                try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) 
-                {
+                JButton cadastrarButton = ((ProfessorAtualizarPanel) sut.getGui()).getAtualizar();
+
+                try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
                     // Act
                     cadastrarButton.doClick();
-        
+
                     // Assert
                     optionPaneMock.verify(
                             () -> JOptionPane.showMessageDialog(
@@ -148,18 +145,18 @@ public class ProfessorAtualizarViewTest {
                                     anyString(),
                                     eq(JOptionPane.ERROR_MESSAGE)),
                             times(1));
-                }          
+                }
             }
         }
     }
 
-    private void AddButtonsMock(ProfessorAtualizarPanel atualizarProfessorPanelMock)
-    {
+    private void AddButtonsMock(ProfessorAtualizarPanel atualizarProfessorPanelMock) {
         // Mock botão de cadastrar
         JButton atualizarButtonSpy = spy(new JButton());
-        doCallRealMethod().when(atualizarButtonSpy).addActionListener(any(ProfessorAtualizarView.AtualizarActionHandler.class));
+        doCallRealMethod().when(atualizarButtonSpy)
+                .addActionListener(any(ProfessorAtualizarView.AtualizarActionHandler.class));
         when(atualizarProfessorPanelMock.getAtualizar()).thenReturn(atualizarButtonSpy);
-        
+
         // Mock botão de cancelar
         JButton cancelarButtonSpy = spy(new JButton());
         doNothing().when(cancelarButtonSpy).addActionListener(any(ProfessorAtualizarView.CancelarActionHandler.class));

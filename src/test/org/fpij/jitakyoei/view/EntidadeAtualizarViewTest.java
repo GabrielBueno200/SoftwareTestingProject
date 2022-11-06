@@ -13,17 +13,16 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
+import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
-import java.awt.Component;
 
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Entidade;
 import org.fpij.jitakyoei.utils.builders.EntidadeMockBuilder;
 import org.fpij.jitakyoei.view.forms.EntidadeForm;
 import org.fpij.jitakyoei.view.gui.EntidadeAtualizarPanel;
-import org.fpij.jitakyoei.view.gui.EntidadeCadastrarPanel;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -55,7 +54,7 @@ public class EntidadeAtualizarViewTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"55.555.555/55@-5", "55.555.555/55a-5" })
+    @ValueSource(strings = { "55.555.555/55@-5", "55.555.555/55a-5" })
     public void Atualizar_EntidadeComCnpjComCaracteresNaoNumericos_ExibirAlertaDeCampoInvalido(String invalidCnjp) {
         Entidade entidade = new EntidadeMockBuilder()
                 .WithCnpj(invalidCnjp)
@@ -63,7 +62,6 @@ public class EntidadeAtualizarViewTest {
 
         TestarEntidadeComCampoVazioOuInvalido(entidade, "O campo 'CPNJ' deve conter apenas números");
     }
-
 
     private void TestarEntidadeComCampoVazioOuInvalido(Entidade entidade, String expectedErrorMessage) {
         // Arrange
@@ -79,10 +77,10 @@ public class EntidadeAtualizarViewTest {
                     EntidadeForm.class,
                     (professorFormMock, context) -> when(professorFormMock.getEntidade()).thenReturn(entidade))) {
 
-                ProfessorCadastrarView sut = new ProfessorCadastrarView(mainAppViewMock);
+                EntidadeAtualizarView sut = new EntidadeAtualizarView(mainAppViewMock, mock(Entidade.class));
                 sut.registerFacade(facadeMock);
 
-                JButton cadastrarButton = ((EntidadeCadastrarPanel) sut.getGui()).getCadastrarEntidade();
+                JButton cadastrarButton = ((EntidadeAtualizarPanel) sut.getGui()).getAtualizarEntidade();
 
                 try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
                     // Act

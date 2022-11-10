@@ -2,6 +2,8 @@ package org.fpij.jitakyoei.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -48,14 +50,25 @@ public class AlunoCadastrarView implements ViewComponent {
 		public void actionPerformed(ActionEvent arg0) {
 			Aluno aluno = alunoForm.getAluno();
 			try {
-                                if (aluno.getFiliado()!= null && aluno.getEntidade() != null && aluno.getProfessor() != null){
+                            if (aluno.getFiliado()!= null && aluno.getEntidade() != null && aluno.getProfessor() != null){
+                                String regexCpf = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
+                                String regexEmail = "^\\w+@\\w+.com$";
+                                String regexNome = "^[a-zA-Z\\s]+$";
+                                Matcher matchCpf = Pattern.compile(regexCpf).matcher(aluno.getFiliado().getCpf());
+                                Matcher matchEmail = Pattern.compile(regexEmail).matcher(aluno.getFiliado().getEmail());
+                                Matcher matchNome = Pattern.compile(regexNome).matcher(aluno.getFiliado().getNome());
+                                if(matchCpf.matches() && matchEmail.matches() && matchNome.matches()){
                                     facade.createAluno(aluno);
                                     JOptionPane.showMessageDialog(gui, "Aluno cadastrado com sucesso!");
                                     parent.removeTabPanel(gui);
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(gui, "Há dados faltantes, por favor preencha os campos obrigatórios!");
-                                }                                
+                                    JOptionPane.showMessageDialog(gui, "Campos NOME/CPF/EMAIL possui formato incorreto!");
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(gui, "Há dados faltantes, por favor preencha os campos obrigatórios!");
+                            }                                
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

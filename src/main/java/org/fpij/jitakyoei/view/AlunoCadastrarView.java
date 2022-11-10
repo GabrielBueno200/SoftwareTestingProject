@@ -31,12 +31,13 @@ public class AlunoCadastrarView implements ViewComponent {
 	public JPanel getGui() {
 		return gui;
 	}
-
+	
 	@Override
 	public void registerFacade(AppFacade fac) {
 		this.facade = fac;
 	}
-
+	
+	
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cadastrar".
 	 * 
@@ -47,15 +48,20 @@ public class AlunoCadastrarView implements ViewComponent {
 		public void actionPerformed(ActionEvent arg0) {
 			Aluno aluno = alunoForm.getAluno();
 			try {
-				facade.createAluno(aluno);
-				JOptionPane.showMessageDialog(gui, "Aluno cadastrado com sucesso!");
-				parent.removeTabPanel(gui);
+                                if (aluno.getFiliado()!= null && aluno.getEntidade() != null && aluno.getProfessor() != null){
+                                    facade.createAluno(aluno);
+                                    JOptionPane.showMessageDialog(gui, "Aluno cadastrado com sucesso!");
+                                    parent.removeTabPanel(gui);
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(gui, "Há dados faltantes, por favor preencha os campos obrigatórios!");
+                                }                                
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
+	
 	/**
 	 * Classe interna responsável por responder aos cliques no botão "Cancelar".
 	 * 

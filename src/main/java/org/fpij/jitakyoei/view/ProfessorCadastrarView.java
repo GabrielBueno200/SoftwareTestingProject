@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -55,10 +57,21 @@ public class ProfessorCadastrarView implements ViewComponent {
 				for (Entidade entidade : entidades) {
 					relacionamentos.add(new ProfessorEntidade(professor, entidade));
 				}
-				facade.createProfessor(professor);
-				facade.createProfessorEntidade(relacionamentos);
-				JOptionPane.showMessageDialog(gui, "Professor cadastrado com sucesso!");
-				parent.removeTabPanel(gui);
+                                String regexCpf = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
+                                String regexEmail = "^\\w+@\\w+.com$";
+                                String regexNome = "^[a-zA-Z\\s]+$";
+                                Matcher matchCpf = Pattern.compile(regexCpf).matcher(professor.getFiliado().getCpf());
+                                Matcher matchEmail = Pattern.compile(regexEmail).matcher(professor.getFiliado().getEmail());
+                                Matcher matchNome = Pattern.compile(regexNome).matcher(professor.getFiliado().getNome());
+                                if (matchCpf.matches() && matchEmail.matches() && matchNome.matches()){
+                                    facade.createProfessor(professor);
+                                    facade.createProfessorEntidade(relacionamentos);
+                                    JOptionPane.showMessageDialog(gui, "Professor cadastrado com sucesso!");
+                                    parent.removeTabPanel(gui);
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(gui, "Não foram inseridos dados obrigatórios ou formato esta incorreto!");
+                                }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

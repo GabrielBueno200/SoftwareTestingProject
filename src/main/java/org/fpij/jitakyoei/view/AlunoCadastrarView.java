@@ -52,12 +52,14 @@ public class AlunoCadastrarView implements ViewComponent {
 			try {
                             if (aluno.getFiliado()!= null && aluno.getEntidade() != null && aluno.getProfessor() != null){
                                 String regexCpf = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
+                                String regexCbj = "^[0-9]+$";
                                 String regexEmail = "^\\w+@\\w+.com$";
                                 String regexNome = "^[a-zA-Z\\s]+$";
                                 Matcher matchCpf = Pattern.compile(regexCpf).matcher(aluno.getFiliado().getCpf());
                                 Matcher matchEmail = Pattern.compile(regexEmail).matcher(aluno.getFiliado().getEmail());
                                 Matcher matchNome = Pattern.compile(regexNome).matcher(aluno.getFiliado().getNome());
-                                if(matchCpf.matches() && matchEmail.matches() && matchNome.matches()){
+                                Matcher matchCbj = Pattern.compile(regexCbj).matcher(aluno.getFiliado().getRegistroCbj());
+                                if(matchCpf.matches() && matchEmail.matches() && matchNome.matches() && matchCbj.matches()){
                                     facade.createAluno(aluno);
                                     JOptionPane.showMessageDialog(gui, "Aluno cadastrado com sucesso!");
                                     parent.removeTabPanel(gui);

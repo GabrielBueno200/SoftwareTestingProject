@@ -26,6 +26,7 @@ org\fpij\jitakyoei\view\ProfessorBuscarView$BuscarActionHandler.class
 org\fpij\jitakyoei\view\MainAppView.class
 org\fpij\jitakyoei\model\beans\Entidade.class
 org\fpij\jitakyoei\view\ProfessorCadastrarView$CadastrarActionHandler.class
+.netbeans_automatic_build
 org\fpij\jitakyoei\view\AlunoAtualizarView$AtualizarActionHandler.class
 org\fpij\jitakyoei\view\EntidadeBuscarView.class
 org\fpij\jitakyoei\view\gui\EnderecoPanel.class

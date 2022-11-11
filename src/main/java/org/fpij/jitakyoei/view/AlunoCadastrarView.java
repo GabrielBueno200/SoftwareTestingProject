@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Aluno;
+import org.fpij.jitakyoei.model.validator.AlunoValidator;
 import org.fpij.jitakyoei.view.forms.AlunoForm;
 import org.fpij.jitakyoei.view.gui.AlunoCadastrarPanel;
 
@@ -51,21 +52,15 @@ public class AlunoCadastrarView implements ViewComponent {
 			Aluno aluno = alunoForm.getAluno();
 			try {
                             if (aluno.getFiliado()!= null && aluno.getEntidade() != null && aluno.getProfessor() != null){
-                                String regexCpf = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
-                                String regexCbj = "^[0-9]+$";
-                                String regexEmail = "^\\w+@\\w+.com$";
-                                String regexNome = "^[a-zA-Z\\s]+$";
-                                Matcher matchCpf = Pattern.compile(regexCpf).matcher(aluno.getFiliado().getCpf());
-                                Matcher matchEmail = Pattern.compile(regexEmail).matcher(aluno.getFiliado().getEmail());
-                                Matcher matchNome = Pattern.compile(regexNome).matcher(aluno.getFiliado().getNome());
-                                Matcher matchCbj = Pattern.compile(regexCbj).matcher(aluno.getFiliado().getRegistroCbj());
-                                if(matchCpf.matches() && matchEmail.matches() && matchNome.matches() && matchCbj.matches()){
+                                AlunoValidator validator = new AlunoValidator();
+                                
+                                if(validator.validate(aluno)){
                                     facade.createAluno(aluno);
                                     JOptionPane.showMessageDialog(gui, "Aluno cadastrado com sucesso!");
                                     parent.removeTabPanel(gui);
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(gui, "Campos NOME/CPF/EMAIL possui formato incorreto!");
+                                    JOptionPane.showMessageDialog(gui, "Campos NOME/CPF/EMAIL/CBJ possuem formato incorreto!");
                                 }
                             }
                             else{

@@ -14,6 +14,7 @@ import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Entidade;
 import org.fpij.jitakyoei.model.beans.Professor;
 import org.fpij.jitakyoei.model.beans.ProfessorEntidade;
+import org.fpij.jitakyoei.model.validator.ProfessorValidator;
 import org.fpij.jitakyoei.view.forms.ProfessorForm;
 import org.fpij.jitakyoei.view.gui.ProfessorCadastrarPanel;
 
@@ -57,13 +58,8 @@ public class ProfessorCadastrarView implements ViewComponent {
 				for (Entidade entidade : entidades) {
 					relacionamentos.add(new ProfessorEntidade(professor, entidade));
 				}
-                                String regexCpf = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
-                                String regexEmail = "^\\w+@\\w+.com$";
-                                String regexNome = "^[a-zA-Z\\s]+$";
-                                Matcher matchCpf = Pattern.compile(regexCpf).matcher(professor.getFiliado().getCpf());
-                                Matcher matchEmail = Pattern.compile(regexEmail).matcher(professor.getFiliado().getEmail());
-                                Matcher matchNome = Pattern.compile(regexNome).matcher(professor.getFiliado().getNome());
-                                if (matchCpf.matches() && matchEmail.matches() && matchNome.matches()){
+                                ProfessorValidator validator = new ProfessorValidator();
+                                if (validator.validate(professor)){
                                     facade.createProfessor(professor);
                                     facade.createProfessorEntidade(relacionamentos);
                                     JOptionPane.showMessageDialog(gui, "Professor cadastrado com sucesso!");

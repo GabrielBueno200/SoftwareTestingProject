@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Entidade;
+import org.fpij.jitakyoei.model.validator.EntidadeValidator;
 import org.fpij.jitakyoei.view.forms.EntidadeForm;
 import org.fpij.jitakyoei.view.gui.EntidadeCadastrarPanel;
 
@@ -49,14 +50,11 @@ public class EntidadeCadastrarView implements ViewComponent {
 		public void actionPerformed(ActionEvent arg0) {
 			try {
                                 Entidade entidade = entidadeForm.getEntidade();
-                                String regexCnpj = "^([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})$";
-                                String regexTelefone = "^\\([0-9]{2}\\)[0-9]{4,5}-[0-9]{4}$";
-                                String regexNome = "^[a-zA-Z\\s]+$";
-                                Matcher matchCnpj = Pattern.compile(regexCnpj).matcher(entidade.getCnpj());
-                                Matcher matchTelefone1 = Pattern.compile(regexTelefone).matcher(entidade.getTelefone1());
-                                Matcher matchNome = Pattern.compile(regexNome).matcher(entidade.getNome());
+                                
                                 if (entidade.getNome().isBlank() && entidade.getCnpj().isBlank() && entidade.getTelefone1().isBlank()){
-                                    if (matchCnpj.matches() && matchTelefone1.matches() && matchNome.matches()){
+                                    EntidadeValidator validator = new EntidadeValidator();
+                                    
+                                    if (validator.validate(entidade)){
                                         facade.createEntidade(entidadeForm.getEntidade());
                                         JOptionPane.showMessageDialog(gui, "Entidade cadastrada com sucesso!");
                                         parent.removeTabPanel(gui);

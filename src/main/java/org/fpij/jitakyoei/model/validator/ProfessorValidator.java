@@ -13,7 +13,7 @@ public class ProfessorValidator implements Validator<Professor>{
 
     @Override
     public boolean validate(Professor obj) {
-        String regexCpf = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
+        String regexCpf = "^[0-9]+$"; //"^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
         String regexEmail = "^\\w+@\\w+.com$";
         String regexNome = "^[a-zA-Z\\s]+$";
         String regexCbj = "^[0-9]+$";

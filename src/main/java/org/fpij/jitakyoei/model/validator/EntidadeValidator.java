@@ -17,7 +17,7 @@ public class EntidadeValidator implements Validator<Entidade>{
 
     @Override
     public boolean validate(Entidade obj) {
-        String regexCnpj = "^([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})$";
+        String regexCnpj = "^[0-9]+$"; //"^([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})$";
         String regexTelefone = "^\\([0-9]{2}\\)[0-9]{4,5}-[0-9]{4}$";
         String regexNome = "^[a-zA-Z\\s]+$";
         Matcher matchCnpj = Pattern.compile(regexCnpj).matcher(obj.getCnpj());

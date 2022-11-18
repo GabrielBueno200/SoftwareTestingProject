@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Professor;
+import org.fpij.jitakyoei.model.validator.ProfessorValidator;
 import org.fpij.jitakyoei.view.forms.ProfessorForm;
 import org.fpij.jitakyoei.view.gui.ProfessorAtualizarPanel;
 
@@ -45,9 +46,16 @@ public class ProfessorAtualizarView implements ViewComponent {
 		public void actionPerformed(ActionEvent arg0) {
 			Professor professor = professorForm.getProfessor();
 			try {
-				facade.updateProfessor(professor);
-				JOptionPane.showMessageDialog(gui, "Professor atualizado com sucesso!");
-				parent.removeTabPanel(gui);
+                                ProfessorValidator validator = new ProfessorValidator();
+                                
+                                if (validator.validate(professor)){
+                                    facade.updateProfessor(professor);
+                                    JOptionPane.showMessageDialog(gui, "Professor atualizado com sucesso!");
+                                    parent.removeTabPanel(gui);
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(gui, "Não foram inseridos dados obrigatórios ou formato esta incorreto!");
+                                }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

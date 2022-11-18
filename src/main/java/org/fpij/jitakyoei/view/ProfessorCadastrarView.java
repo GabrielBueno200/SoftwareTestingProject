@@ -59,14 +59,20 @@ public class ProfessorCadastrarView implements ViewComponent {
 					relacionamentos.add(new ProfessorEntidade(professor, entidade));
 				}
                                 ProfessorValidator validator = new ProfessorValidator();
-                                if (validator.validate(professor)){
-                                    facade.createProfessor(professor);
-                                    facade.createProfessorEntidade(relacionamentos);
-                                    JOptionPane.showMessageDialog(gui, "Professor cadastrado com sucesso!");
-                                    parent.removeTabPanel(gui);
+                                String result = validator.validateMissingFields(professor);
+                                if (result.equals("")){
+                                    if (validator.validate(professor)){
+                                        facade.createProfessor(professor);
+                                        facade.createProfessorEntidade(relacionamentos);
+                                        JOptionPane.showMessageDialog(gui, "Professor cadastrado com sucesso!");
+                                        parent.removeTabPanel(gui);
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(gui, "Formato dos dados NOME/EMAIL/CPF estão incorreto!");
+                                    }
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(gui, "Não foram inseridos dados obrigatórios ou formato esta incorreto!");
+                                    JOptionPane.showMessageDialog(gui, result);
                                 }
 			} catch (Exception e) {
 				e.printStackTrace();

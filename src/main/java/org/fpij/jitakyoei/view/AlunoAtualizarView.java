@@ -46,10 +46,10 @@ public class AlunoAtualizarView implements ViewComponent {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			Aluno aluno = alunoForm.getAluno();
+                        AlunoValidator validator = new AlunoValidator();
+                        String result = validator.validateMissingFields(aluno);
 			try {
-                            if (aluno.getFiliado()!= null && aluno.getEntidade() != null && aluno.getProfessor() != null){
-                                AlunoValidator validator = new AlunoValidator();
-                                
+                            if (result.equals("")){
                                 if(validator.validate(aluno)){
                                     facade.updateAluno(aluno);
                                     JOptionPane.showMessageDialog(gui, "Aluno atualizado com sucesso!");
@@ -60,7 +60,7 @@ public class AlunoAtualizarView implements ViewComponent {
                                 }
                             }
                             else{
-                                JOptionPane.showMessageDialog(gui, "Há dados faltantes, por favor preencha os campos obrigatórios!");
+                                JOptionPane.showMessageDialog(gui, result);
                             }  
 			} catch (Exception e) {
 				e.printStackTrace();

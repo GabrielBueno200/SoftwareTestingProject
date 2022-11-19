@@ -51,9 +51,9 @@ public class AlunoCadastrarView implements ViewComponent {
 		public void actionPerformed(ActionEvent arg0) {
 			Aluno aluno = alunoForm.getAluno();
 			try {
-                            if (aluno.getFiliado()!= null && aluno.getEntidade() != null && aluno.getProfessor() != null){
-                                AlunoValidator validator = new AlunoValidator();
-                                
+                            AlunoValidator validator = new AlunoValidator();
+                            String result = validator.validateMissingFields(aluno);
+                            if (result.equals("")){  
                                 if(validator.validate(aluno)){
                                     facade.createAluno(aluno);
                                     JOptionPane.showMessageDialog(gui, "Aluno cadastrado com sucesso!");
@@ -64,7 +64,7 @@ public class AlunoCadastrarView implements ViewComponent {
                                 }
                             }
                             else{
-                                JOptionPane.showMessageDialog(gui, "Há dados faltantes, por favor preencha os campos obrigatórios!");
+                                JOptionPane.showMessageDialog(gui, result);
                             }                                
 			} catch (Exception e) {
 				e.printStackTrace();

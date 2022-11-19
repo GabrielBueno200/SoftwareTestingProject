@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Entidade;
+import org.fpij.jitakyoei.model.validator.EntidadeValidator;
 import org.fpij.jitakyoei.view.forms.EntidadeForm;
 import org.fpij.jitakyoei.view.gui.EntidadeAtualizarPanel;
 
@@ -47,9 +48,24 @@ public class EntidadeAtualizarView implements ViewComponent {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			try {
-				facade.updateEntidade(entidadeForm.getEntidade()); 
-				JOptionPane.showMessageDialog(gui, "Entidade alterada com sucesso!");
-				parent.removeTabPanel(gui);
+                                Entidade entidade = entidadeForm.getEntidade();
+                                EntidadeValidator validator = new EntidadeValidator();
+                                String result = validator.validateMissingFields(entidade);
+                                
+                                if (result.equals("")){
+                                    
+                                    if (validator.validate(entidade)){
+                                        facade.updateEntidade(entidade); 
+                                        JOptionPane.showMessageDialog(gui, "Entidade alterada com sucesso!");
+                                        parent.removeTabPanel(gui);
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(gui, "Campos NOME/CNPJ/TELEFONE possuem formato incorreto!");
+                                    }
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(gui, result);
+                                }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

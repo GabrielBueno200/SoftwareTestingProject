@@ -50,9 +50,11 @@ public class EntidadeCadastrarView implements ViewComponent {
 		public void actionPerformed(ActionEvent arg0) {
 			try {
                                 Entidade entidade = entidadeForm.getEntidade();
+                                EntidadeValidator validator = new EntidadeValidator();
+                                String result = validator.validateMissingFields(entidade);
                                 
-                                if (entidade.getNome().isBlank() && entidade.getCnpj().isBlank() && entidade.getTelefone1().isBlank()){
-                                    EntidadeValidator validator = new EntidadeValidator();
+                                if (result.equals("")){
+                                    
                                     
                                     if (validator.validate(entidade)){
                                         facade.createEntidade(entidadeForm.getEntidade());
@@ -64,7 +66,7 @@ public class EntidadeCadastrarView implements ViewComponent {
                                     }
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(gui, "Campos obrigatórios não preenchidos!");
+                                    JOptionPane.showMessageDialog(gui, result);
                                 }
 			} catch (Exception e) {
 				e.printStackTrace();

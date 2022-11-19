@@ -47,14 +47,19 @@ public class ProfessorAtualizarView implements ViewComponent {
 			Professor professor = professorForm.getProfessor();
 			try {
                                 ProfessorValidator validator = new ProfessorValidator();
-                                
-                                if (validator.validate(professor)){
-                                    facade.updateProfessor(professor);
-                                    JOptionPane.showMessageDialog(gui, "Professor atualizado com sucesso!");
-                                    parent.removeTabPanel(gui);
+                                String result = validator.validateMissingFields(professor);
+                                if (result.equals("")){
+                                    if (validator.validate(professor)){
+                                        facade.updateProfessor(professor);
+                                        JOptionPane.showMessageDialog(gui, "Professor atualizado com sucesso!");
+                                        parent.removeTabPanel(gui);
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(gui, "Formato dos dados NOME/EMAIL/CPF estão incorreto!");
+                                    }
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(gui, "Não foram inseridos dados obrigatórios ou formato esta incorreto!");
+                                    JOptionPane.showMessageDialog(gui, result);
                                 }
 			} catch (Exception e) {
 				e.printStackTrace();

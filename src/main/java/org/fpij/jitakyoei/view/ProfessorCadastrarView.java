@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -12,6 +14,7 @@ import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Entidade;
 import org.fpij.jitakyoei.model.beans.Professor;
 import org.fpij.jitakyoei.model.beans.ProfessorEntidade;
+import org.fpij.jitakyoei.model.validator.ProfessorValidator;
 import org.fpij.jitakyoei.view.forms.ProfessorForm;
 import org.fpij.jitakyoei.view.gui.ProfessorCadastrarPanel;
 
@@ -55,10 +58,22 @@ public class ProfessorCadastrarView implements ViewComponent {
 				for (Entidade entidade : entidades) {
 					relacionamentos.add(new ProfessorEntidade(professor, entidade));
 				}
-				facade.createProfessor(professor);
-				facade.createProfessorEntidade(relacionamentos);
-				JOptionPane.showMessageDialog(gui, "Professor cadastrado com sucesso!");
-				parent.removeTabPanel(gui);
+                                ProfessorValidator validator = new ProfessorValidator();
+                                String result = validator.validateMissingFields(professor);
+                                if (result.equals("")){
+                                    if (validator.validate(professor)){
+                                        facade.createProfessor(professor);
+                                        facade.createProfessorEntidade(relacionamentos);
+                                        JOptionPane.showMessageDialog(gui, "Professor cadastrado com sucesso!");
+                                        parent.removeTabPanel(gui);
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(gui, "Formato dos dados NOME/EMAIL/CPF estão incorreto!");
+                                    }
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(gui, result);
+                                }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

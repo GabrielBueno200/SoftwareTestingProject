@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import org.fpij.jitakyoei.facade.AppFacade;
 import org.fpij.jitakyoei.model.beans.Aluno;
+import org.fpij.jitakyoei.model.validator.AlunoValidator;
 import org.fpij.jitakyoei.view.forms.AlunoForm;
 import org.fpij.jitakyoei.view.gui.AlunoAtualizarPanel;
 
@@ -45,10 +46,22 @@ public class AlunoAtualizarView implements ViewComponent {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			Aluno aluno = alunoForm.getAluno();
+                        AlunoValidator validator = new AlunoValidator();
+                        String result = validator.validateMissingFields(aluno);
 			try {
-				facade.updateAluno(aluno);
-				JOptionPane.showMessageDialog(gui, "Aluno atualizado com sucesso!");
-				parent.removeTabPanel(gui);
+                            if (result.equals("")){
+                                if(validator.validate(aluno)){
+                                    facade.updateAluno(aluno);
+                                    JOptionPane.showMessageDialog(gui, "Aluno atualizado com sucesso!");
+                                    parent.removeTabPanel(gui);
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(gui, "Campos NOME/CPF/EMAIL/CBJ possuem formato incorreto!");
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(gui, result);
+                            }  
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

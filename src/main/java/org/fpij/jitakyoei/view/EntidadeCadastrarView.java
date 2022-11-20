@@ -2,11 +2,15 @@ package org.fpij.jitakyoei.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.fpij.jitakyoei.facade.AppFacade;
+import org.fpij.jitakyoei.model.beans.Entidade;
+import org.fpij.jitakyoei.model.validator.EntidadeValidator;
 import org.fpij.jitakyoei.view.forms.EntidadeForm;
 import org.fpij.jitakyoei.view.gui.EntidadeCadastrarPanel;
 
@@ -45,9 +49,25 @@ public class EntidadeCadastrarView implements ViewComponent {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			try {
-				facade.createEntidade(entidadeForm.getEntidade());
-				JOptionPane.showMessageDialog(gui, "Entidade cadastrada com sucesso!");
-				parent.removeTabPanel(gui);
+                                Entidade entidade = entidadeForm.getEntidade();
+                                EntidadeValidator validator = new EntidadeValidator();
+                                String result = validator.validateMissingFields(entidade);
+                                
+                                if (result.equals("")){
+                                    
+                                    
+                                    if (validator.validate(entidade)){
+                                        facade.createEntidade(entidadeForm.getEntidade());
+                                        JOptionPane.showMessageDialog(gui, "Entidade cadastrada com sucesso!");
+                                        parent.removeTabPanel(gui);
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(gui, "Campos NOME/CNPJ/TELEFONE possuem formato incorreto!");
+                                    }
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(gui, result);
+                                }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

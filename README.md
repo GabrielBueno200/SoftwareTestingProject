@@ -1,6 +1,6 @@
 # SoftwareTestingProject
 
-Este projeto é a implementação de um [sistema](https://github.com/aecio/JitaKyoei) para o gerenciamento dos dados da Federação Piauiense de Judô, no qual serão aplicados os conceitos da disciplina CC8550 - SIMULAÇÃO E TESTE DE SOFTWARE ministrada no [Centro Universitário FEI](https://portal.fei.edu.br/ciencia-da-computacao). Foram aplicados testes de unidade e de caso de uso no sistema proposto e praticados conceitos de inspeção de software, identificando e solucionando defeitos de documentação e codificação.
+Este projeto é a implementação de um [sistema](https://github.com/aecio/JitaKyoei) para o gerenciamento dos dados da Federação Piauiense de Judô, no qual foram aplicados os conceitos da disciplina CC8550 - SIMULAÇÃO E TESTE DE SOFTWARE ministrada no [Centro Universitário FEI](https://portal.fei.edu.br/ciencia-da-computacao), como a aplicação de testes de unidade e de caso de uso, bem como de inspeção de software, identificando e solucionando defeitos de documentação e codificação.
 
 ### INTEGRANTES
 

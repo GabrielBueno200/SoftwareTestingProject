@@ -25,7 +25,7 @@ public class ProfessorMockBuilder {
     }
 
     public ProfessorMockBuilder WithCpf(String cpf) {
-        professorInstance.getFiliado().setRegistroCbj(cpf);
+        professorInstance.getFiliado().setCpf(cpf);
         return this;
     }
 

@@ -43,7 +43,6 @@ public class ProfessorCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "Gabriel 123", "@Henrique" })
     public void Cadastrar_ProfessorComNomeComCaracteresNaoAlfabeticos_ExibirAlertaDeNomeInvalido(String invalidNome) {
         Professor professor = new ProfessorMockBuilder()
@@ -66,7 +65,6 @@ public class ProfessorCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "123abc", "cdf@#" })
     public void Cadastrar_ProfessorComRegistroCbjComCaracteresNaoNumericos_ExibirAlertaDeRegistroCbjInvalido(
             String invalidRegistroCbj) {
@@ -89,8 +87,7 @@ public class ProfessorCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "abc568978de", "@#1234567#@" })
+    @ValueSource(strings = { "698.568.978-3e", "@#1.234.567-#@" })
     public void Cadastrar_ProfessorComCpfComCaracteresInvalidos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Professor professor = new ProfessorMockBuilder()
                 .WithCpf(invalidCpf)
@@ -100,8 +97,7 @@ public class ProfessorCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "1111111111123", "123456", "1234567891011" })
+    @ValueSource(strings = { "111.1141.111-23", "123.456.7899-55", "123.456.789-1" })
     public void Cadastrar_ProfessorComCpfMaiorOuMenorQue11Digitos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Professor professor = new ProfessorMockBuilder()
                 .WithCpf(invalidCpf)
@@ -119,27 +115,24 @@ public class ProfessorCadastrarViewTest {
         doNothing().when(facadeMock).createProfessorEntidade(any(List.class));
 
         try (MockedConstruction<ProfessorCadastrarPanel> panelMockScope = mockConstruction(
-            ProfessorCadastrarPanel.class, 
-            (cadastrarProfessorPanelMock, context) -> AddButtonsMock(cadastrarProfessorPanelMock))
-        ){
+                ProfessorCadastrarPanel.class,
+                (cadastrarProfessorPanelMock, context) -> AddButtonsMock(cadastrarProfessorPanelMock))) {
             try (MockedConstruction<ProfessorForm> formMockScope = mockConstruction(
-                ProfessorForm.class, 
-                (professorFormMock, context) -> { 
-                    when(professorFormMock.getProfessor()).thenReturn(professor);
-                    when(professorFormMock.getEntidadesList()).thenReturn(professor.getEntidades());
-                })
-            ){
+                    ProfessorForm.class,
+                    (professorFormMock, context) -> {
+                        when(professorFormMock.getProfessor()).thenReturn(professor);
+                        when(professorFormMock.getEntidadesList()).thenReturn(professor.getEntidades());
+                    })) {
 
                 ProfessorCadastrarView sut = new ProfessorCadastrarView(mainAppViewMock);
                 sut.registerFacade(facadeMock);
 
-                JButton cadastrarButton = ((ProfessorCadastrarPanel)sut.getGui()).getCadastrar();
-                
-                try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) 
-                {
+                JButton cadastrarButton = ((ProfessorCadastrarPanel) sut.getGui()).getCadastrar();
+
+                try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
                     // Act
                     cadastrarButton.doClick();
-        
+
                     // Assert
                     optionPaneMock.verify(
                             () -> JOptionPane.showMessageDialog(
@@ -148,18 +141,18 @@ public class ProfessorCadastrarViewTest {
                                     anyString(),
                                     eq(JOptionPane.ERROR_MESSAGE)),
                             times(1));
-                }          
+                }
             }
         }
     }
 
-    private void AddButtonsMock(ProfessorCadastrarPanel cadastrarProfessorPanelMock)
-    {
+    private void AddButtonsMock(ProfessorCadastrarPanel cadastrarProfessorPanelMock) {
         // Mock botão de cadastrar
         JButton cadastrarButtonSpy = spy(new JButton());
-        doCallRealMethod().when(cadastrarButtonSpy).addActionListener(any(ProfessorCadastrarView.CadastrarActionHandler.class));
+        doCallRealMethod().when(cadastrarButtonSpy)
+                .addActionListener(any(ProfessorCadastrarView.CadastrarActionHandler.class));
         when(cadastrarProfessorPanelMock.getCadastrar()).thenReturn(cadastrarButtonSpy);
-        
+
         // Mock botão de cancelar
         JButton cancelarButtonSpy = spy(new JButton());
         doNothing().when(cancelarButtonSpy).addActionListener(any(ProfessorCadastrarView.CancelarActionHandler.class));

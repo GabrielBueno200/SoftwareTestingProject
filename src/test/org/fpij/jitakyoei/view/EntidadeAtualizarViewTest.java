@@ -53,7 +53,6 @@ public class EntidadeAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "55.555.555/55@-5", "55.555.555/55a-5" })
     public void Atualizar_EntidadeComCnpjComCaracteresNaoNumericos_ExibirAlertaDeCampoInvalido(String invalidCnjp) {
         Entidade entidade = new EntidadeMockBuilder()

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.fpij.jitakyoei.model.beans.Filiado;
 import org.fpij.jitakyoei.model.beans.Professor;
 
 import com.github.javafaker.Faker;
@@ -19,12 +18,8 @@ public class ProfessorMock {
     public Professor GetProfessorMock() {
         Professor professor = new Professor();
 
-        Filiado filiado = new Filiado();
-        filiado.setNome(faker.name().fullName());
-        filiado.setId(faker.random().nextLong());
-        filiado.setRegistroCbj(faker.number().digits(3));
-
-        professor.setFiliado(filiado);
+        professor.setFiliado(new FiliadoMock().GetFiliadoMock());
+        professor.setEntidades(new EntidadeMock().GetEntidadesMock(faker.number().numberBetween(1, 5)));
 
         return professor;
     }
@@ -32,10 +27,8 @@ public class ProfessorMock {
     public List<Professor> GetProfessoresMock(int professoresAmount) {
         ArrayList<Professor> professores = new ArrayList<>();
 
-        for (int i = 0; i < professoresAmount; i++) {
-
+        for (int i = 0; i < professoresAmount; i++)
             professores.add(GetProfessorMock());
-        }
 
         return professores;
     }

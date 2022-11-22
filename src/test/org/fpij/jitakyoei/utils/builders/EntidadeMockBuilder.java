@@ -20,11 +20,6 @@ public class EntidadeMockBuilder {
         return this;
     }
 
-    public EntidadeMockBuilder WithRegistroCbj(String cnpj) {
-        entidadeInstance.setCnpj(cnpj);
-        return this;
-    }
-
     public Entidade Build() {
         return entidadeInstance;
     }

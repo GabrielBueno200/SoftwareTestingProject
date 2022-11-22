@@ -75,7 +75,7 @@ public class EntidadeCadastrarViewTest {
                 (cadastrarEntidadePanelMock, context) -> AddButtonsMock(cadastrarEntidadePanelMock))) {
             try (MockedConstruction<EntidadeForm> formMockScope = mockConstruction(
                     EntidadeForm.class,
-                    (professorFormMock, context) -> when(professorFormMock.getEntidade()).thenReturn(entidade))) {
+                    (entidadeFormMock, context) -> when(entidadeFormMock.getEntidade()).thenReturn(entidade))) {
 
                 EntidadeCadastrarView sut = new EntidadeCadastrarView(mainAppViewMock);
                 sut.registerFacade(facadeMock);

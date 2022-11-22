@@ -21,7 +21,7 @@ public class AlunoMockBuilder {
     }
 
     public AlunoMockBuilder WithCpf(String cpf) {
-        alunoInstance.getFiliado().setRegistroCbj(cpf);
+        alunoInstance.getFiliado().setCpf(cpf);
         return this;
     }
 

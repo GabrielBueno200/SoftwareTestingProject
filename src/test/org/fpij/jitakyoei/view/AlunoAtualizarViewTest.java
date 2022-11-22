@@ -42,7 +42,6 @@ public class AlunoAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "Gabriel 123", "@Henrique" })
     public void Atualizar_AlunoComNomeComCaracteresNaoAlfabeticos_ExibirAlertaDeNomeInvalido(String invalidNome) {
         Aluno aluno = new AlunoMockBuilder()
@@ -64,7 +63,6 @@ public class AlunoAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "123abc", "cdf@#" })
     public void Atualizar_AlunoComRegistroCbjComCaracteresNaoNumericos_ExibirAlertaDeRegistroCbjInvalido(
             String invalidRegistroCbj) {
@@ -87,8 +85,7 @@ public class AlunoAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "abc568978de", "@#1234567#@" })
+    @ValueSource(strings = { "698.568.978-3e", "@#1.234.567-#@" })
     public void Atualizar_AlunoComCpfComCaracteresNaoNumericos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Aluno aluno = new AlunoMockBuilder()
                 .WithCpf(invalidCpf)
@@ -98,8 +95,7 @@ public class AlunoAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "1111111111123", "123456", "1234567891011" })
+    @ValueSource(strings = { "111.1141.111-23", "123.456.7899-55", "123.456.789-1" })
     public void Atualizar_AlunoComCpfMaiorOuMenorQue11Digitos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Aluno aluno = new AlunoMockBuilder()
                 .WithCpf(invalidCpf)

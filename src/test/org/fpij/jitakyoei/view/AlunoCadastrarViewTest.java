@@ -42,7 +42,6 @@ public class AlunoCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "Gabriel 123", "@Henrique" })
     public void Cadastrar_AlunoComNomeComCaracteresNaoAlfabeticos_ExibirAlertaDeNomeInvalido(String invalidNome) {
         Aluno aluno = new AlunoMockBuilder()
@@ -64,7 +63,6 @@ public class AlunoCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "123abc", "cdf@#" })
     public void Cadastrar_AlunoComRegistroCbjComCaracteresNaoNumericos_ExibirAlertaDeRegistroCbjInvalido(
             String invalidRegistroCbj) {
@@ -87,8 +85,7 @@ public class AlunoCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "abc568978de", "@#1234567#@" })
+    @ValueSource(strings = { "698.568.978-3e", "@#1.234.567-#@" })
     public void Cadastrar_AlunoComCpfComCaracteresNaoNumericos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Aluno aluno = new AlunoMockBuilder()
                 .WithCpf(invalidCpf)
@@ -98,8 +95,7 @@ public class AlunoCadastrarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "1111111111123", "123456", "1234567891011" })
+    @ValueSource(strings = { "111.1141.111-23", "123.456.7899-55", "123.456.789-1" })
     public void Cadastrar_AlunoComCpfMaiorOuMenorQue11Digitos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Aluno aluno = new AlunoMockBuilder()
                 .WithCpf(invalidCpf)
@@ -116,24 +112,21 @@ public class AlunoCadastrarViewTest {
         doNothing().when(facadeMock).createAluno(any(Aluno.class));
 
         try (MockedConstruction<AlunoCadastrarPanel> panelMockScope = mockConstruction(
-            AlunoCadastrarPanel.class, 
-            (cadastrarAlunoPanelMock, context) -> AddButtonsMock(cadastrarAlunoPanelMock))
-        ){
+                AlunoCadastrarPanel.class,
+                (cadastrarAlunoPanelMock, context) -> AddButtonsMock(cadastrarAlunoPanelMock))) {
             try (MockedConstruction<AlunoForm> formMockScope = mockConstruction(
-                AlunoForm.class, 
-                (alunoFormMock, context) -> when(alunoFormMock.getAluno()).thenReturn(aluno))
-            ){
+                    AlunoForm.class,
+                    (alunoFormMock, context) -> when(alunoFormMock.getAluno()).thenReturn(aluno))) {
 
                 AlunoCadastrarView sut = new AlunoCadastrarView(mainAppViewMock);
                 sut.registerFacade(facadeMock);
 
-                JButton cadastrarButton = ((AlunoCadastrarPanel)sut.getGui()).getCadastrar();
-                
-                try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) 
-                {
+                JButton cadastrarButton = ((AlunoCadastrarPanel) sut.getGui()).getCadastrar();
+
+                try (MockedStatic<JOptionPane> optionPaneMock = mockStatic(JOptionPane.class)) {
                     // Act
                     cadastrarButton.doClick();
-        
+
                     // Assert
                     optionPaneMock.verify(
                             () -> JOptionPane.showMessageDialog(
@@ -142,18 +135,18 @@ public class AlunoCadastrarViewTest {
                                     anyString(),
                                     eq(JOptionPane.ERROR_MESSAGE)),
                             times(1));
-                }          
+                }
             }
         }
     }
 
-    private void AddButtonsMock(AlunoCadastrarPanel cadastrarAlunoPanelMock)
-    {
+    private void AddButtonsMock(AlunoCadastrarPanel cadastrarAlunoPanelMock) {
         // Mock botão de cadastrar
         JButton cadastrarButtonSpy = spy(new JButton());
-        doCallRealMethod().when(cadastrarButtonSpy).addActionListener(any(AlunoCadastrarView.CadastrarActionHandler.class));
+        doCallRealMethod().when(cadastrarButtonSpy)
+                .addActionListener(any(AlunoCadastrarView.CadastrarActionHandler.class));
         when(cadastrarAlunoPanelMock.getCadastrar()).thenReturn(cadastrarButtonSpy);
-        
+
         // Mock botão de cancelar
         JButton cancelarButtonSpy = spy(new JButton());
         doNothing().when(cancelarButtonSpy).addActionListener(any(AlunoCadastrarView.CancelarActionHandler.class));

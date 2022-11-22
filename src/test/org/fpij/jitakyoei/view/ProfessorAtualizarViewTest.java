@@ -43,7 +43,6 @@ public class ProfessorAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "Gabriel 123", "@Henrique" })
     public void Atualizar_ProfessorComNomeComCaracteresNaoAlfabeticos_ExibirAlertaDeNomeInvalido(String invalidNome) {
         Professor professor = new ProfessorMockBuilder()
@@ -66,7 +65,6 @@ public class ProfessorAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
     @ValueSource(strings = { "123abc", "cdf@#" })
     public void Atualizar_ProfessorComRegistroCbjComCaracteresNaoNumericos_ExibirAlertaDeRegistroCbjInvalido(
             String invalidRegistroCbj) {
@@ -89,8 +87,7 @@ public class ProfessorAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "abc568978de", "@#1234567#@" })
+    @ValueSource(strings = { "698.568.978-3e", "@#1.234.567-#@" })
     public void Atualizar_ProfessorComCpfComCaracteresInvalidos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Professor professor = new ProfessorMockBuilder()
                 .WithCpf(invalidCpf)
@@ -100,8 +97,7 @@ public class ProfessorAtualizarViewTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "1111111111123", "123456", "1234567891011" })
+    @ValueSource(strings = { "111.1141.111-23", "123.456.7899-55", "123.456.789-1" })
     public void Atualizar_ProfessorComCpfMaiorOuMenorQue11Digitos_ExibirAlertaDeCpfInvalido(String invalidCpf) {
         Professor professor = new ProfessorMockBuilder()
                 .WithCpf(invalidCpf)

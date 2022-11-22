@@ -74,7 +74,7 @@ public class EntidadeAtualizarViewTest {
                 (atualizarEntidadePanelMock, context) -> AddButtonsMock(atualizarEntidadePanelMock))) {
             try (MockedConstruction<EntidadeForm> formMockScope = mockConstruction(
                     EntidadeForm.class,
-                    (professorFormMock, context) -> when(professorFormMock.getEntidade()).thenReturn(entidade))) {
+                    (entidadeFormMock, context) -> when(entidadeFormMock.getEntidade()).thenReturn(entidade))) {
 
                 EntidadeAtualizarView sut = new EntidadeAtualizarView(mainAppViewMock, mock(Entidade.class));
                 sut.registerFacade(facadeMock);

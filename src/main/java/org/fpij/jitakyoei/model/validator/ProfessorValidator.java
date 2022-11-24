@@ -15,7 +15,7 @@ public class ProfessorValidator implements Validator<Professor>{
     public boolean validate(Professor obj) {
         String regexCpf = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$";
         String regexEmail = "^\\w+@\\w+.com$";
-        String regexNome = "^[a-zA-Z]+$";//"^[a-zA-Z\\s]+$";
+        String regexNome = "^[a-zA-Z\\s]+$";
         String regexCbj = "^[0-9]+$";
         Matcher matchCpf = Pattern.compile(regexCpf).matcher(obj.getFiliado().getCpf());
         Matcher matchEmail = Pattern.compile(regexEmail).matcher(obj.getFiliado().getEmail());

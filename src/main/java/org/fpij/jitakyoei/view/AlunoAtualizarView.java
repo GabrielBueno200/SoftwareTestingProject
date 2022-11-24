@@ -56,7 +56,7 @@ public class AlunoAtualizarView implements ViewComponent {
                                     parent.removeTabPanel(gui);
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(gui, "Campos NOME/CPF/EMAIL/CBJ possuem formato incorreto!");
+                                    JOptionPane.showMessageDialog(gui, "Campos NOME/CPF/CBJ possuem formato incorreto!");
                                 }
                             }
                             else{

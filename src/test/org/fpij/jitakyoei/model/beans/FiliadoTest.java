@@ -11,9 +11,11 @@ public class FiliadoTest {
     public void CpfDeveConterApenas11CaracteresNumericos(String cpf) {
         // Arrange
         Filiado sut = new Filiado();
+        
+        String newCpf = cpf.replaceAll("[.-]", "");
 
         // Act
-        sut.setCpf(cpf);
+        sut.setCpf(newCpf);
 
         // Assert
         assertThat(sut.getCpf()).containsOnlyDigits().hasSize(11);

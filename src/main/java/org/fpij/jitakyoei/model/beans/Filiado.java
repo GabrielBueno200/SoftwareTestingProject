@@ -128,7 +128,7 @@ public class Filiado {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf.replaceAll("[.-]", "");
+		this.cpf = cpf;
 	}
 
 	public List<Faixa> getFaixas() {

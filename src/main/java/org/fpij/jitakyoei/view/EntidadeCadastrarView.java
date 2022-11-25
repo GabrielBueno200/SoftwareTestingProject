@@ -62,7 +62,7 @@ public class EntidadeCadastrarView implements ViewComponent {
                                         parent.removeTabPanel(gui);
                                     }
                                     else{
-                                        JOptionPane.showMessageDialog(gui, "Campos NOME/CNPJ/TELEFONE possuem formato incorreto!");
+                                        JOptionPane.showMessageDialog(gui, "Campos NOME/CNPJ possuem formato incorreto!");
                                     }
                                 }
                                 else{

@@ -68,7 +68,7 @@ public class ProfessorCadastrarView implements ViewComponent {
                                         parent.removeTabPanel(gui);
                                     }
                                     else{
-                                        JOptionPane.showMessageDialog(gui, "Formato dos dados NOME/CPF/CBJ estão incorreto!");
+                                        JOptionPane.showMessageDialog(gui, "Formato dos dados NOME/EMAIL/CPF estão incorreto!");
                                     }
                                 }
                                 else{
